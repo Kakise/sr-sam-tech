@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import Butter from 'buttercms'
+import {Helmet} from "react-helmet";
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
@@ -34,6 +35,9 @@ class BlogHome extends Component {
 
             return (
                 <div>
+                    <Helmet>
+                        <title>Sam's TechBlog - Accueil</title>
+                    </Helmet>
                     {this.state.resp.data.map((post) => {
                         return (
                             <div className="post-link" key={post.slug}>
@@ -61,4 +65,66 @@ class BlogHome extends Component {
     }
 }
 
-export default withRouter(BlogHome);
+class Categories extends React.Component {
+    state = {
+        data: []
+    }
+    async componentDidMount () {
+        const resp = await butter.category.list()
+        this.setState(resp.data)
+    }
+    render () {
+        return (
+            <div>
+                {this.state.data.map((category, key) => {
+                    return (
+                        <div key={key}>
+                            <a href={`/blog/category/${category.slug}`}>{category.name}</a>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+}
+
+class Category extends React.Component {
+    state = {
+        data: {
+            recent_posts: []
+        }
+    }
+    async componentDidMount () {
+        const { match } = this.props
+        const resp = await butter.category.retrieve(match.params.category, {
+            include: 'recent_posts'
+        })
+        this.setState(resp.data)
+    }
+    render () {
+        const category = this.state.data
+
+        return (
+            <div>
+                <h1>{category.name}</h1>
+                <div>
+                    {this.state.data.recent_posts.map((post, key) => {
+                        return (
+                            <div key={key}>
+                                <a href={`/blog/posts/${post.slug}`}>{post.title}</a>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        )
+    }
+}
+
+const RoutedBlogHome = withRouter(BlogHome);
+
+export {
+    RoutedBlogHome as BlogHome,
+    Categories,
+    Category
+};
