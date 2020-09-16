@@ -3,6 +3,8 @@ import Butter from 'buttercms'
 import { Helmet } from "react-helmet";
 import { withRouter } from 'react-router-dom';
 
+import './BlogPost.css';
+
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 class BlogPost extends Component {
@@ -31,7 +33,7 @@ class BlogPost extends Component {
             const post = this.state.post;
 
             return (
-                <div>
+                <div className="post">
                     <Helmet>
                         <title>{post.seo_title}</title>
                         <meta name="description" content={post.meta_description} />

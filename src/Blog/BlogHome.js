@@ -3,6 +3,10 @@ import { Link, withRouter } from 'react-router-dom'
 import Butter from 'buttercms'
 import {Helmet} from "react-helmet";
 
+import Header from './Header';
+
+import './BlogHome.css';
+
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 class BlogHome extends Component {
@@ -38,10 +42,14 @@ class BlogHome extends Component {
                     <Helmet>
                         <title>Sam's TechBlog - Accueil</title>
                     </Helmet>
+                    <Header />
                     {this.state.resp.data.map((post) => {
                         return (
-                            <div className="post-link" key={post.slug}>
-                                <Link to={`/post/${post.slug}`}>{post.title}</Link>
+                            <div className="post-element">
+                                <div className="post-link" key={post.slug}>
+                                    <Link to={`/post/${post.slug}`}>{post.title}</Link>
+                                </div>
+                                <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
                             </div>
                         )
                     })}
@@ -76,6 +84,9 @@ class Categories extends React.Component {
     render () {
         return (
             <div>
+                <Helmet>
+                    <title>Sam's TechBlog - Catégories</title>
+                </Helmet>
                 {this.state.data.map((category, key) => {
                     return (
                         <div key={key}>
@@ -106,6 +117,9 @@ class Category extends React.Component {
 
         return (
             <div>
+                <Helmet>
+                    <title>Sam's TechBlog - {category.name}</title>
+                </Helmet>
                 <h1>{category.name}</h1>
                 <div>
                     {this.state.data.recent_posts.map((post, key) => {
