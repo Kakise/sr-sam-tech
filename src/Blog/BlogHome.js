@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom'
-import Butter from 'buttercms'
+import React, { Component, Suspense } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
-
-import Header from './Header';
-
 import './BlogHome.css';
 
+const Header = React.lazy(() => import('./Header'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 class BlogHome extends Component {
@@ -42,7 +40,9 @@ class BlogHome extends Component {
                     <Helmet>
                         <title>Sam's TechBlog - Accueil</title>
                     </Helmet>
-                    <Header />
+                    <Suspense fallback={<div className="loading">Loading...</div>}>
+                        <Header />
+                    </Suspense>
                     {this.state.resp.data.map((post) => {
                         return (
                             <div className="post-element">
@@ -73,72 +73,4 @@ class BlogHome extends Component {
     }
 }
 
-class Categories extends React.Component {
-    state = {
-        data: []
-    }
-    async componentDidMount () {
-        const resp = await butter.category.list()
-        this.setState(resp.data)
-    }
-    render () {
-        return (
-            <div>
-                <Helmet>
-                    <title>Sam's TechBlog - Catégories</title>
-                </Helmet>
-                {this.state.data.map((category, key) => {
-                    return (
-                        <div key={key}>
-                            <a href={`/blog/category/${category.slug}`}>{category.name}</a>
-                        </div>
-                    )
-                })}
-            </div>
-        )
-    }
-}
-
-class Category extends React.Component {
-    state = {
-        data: {
-            recent_posts: []
-        }
-    }
-    async componentDidMount () {
-        const { match } = this.props
-        const resp = await butter.category.retrieve(match.params.category, {
-            include: 'recent_posts'
-        })
-        this.setState(resp.data)
-    }
-    render () {
-        const category = this.state.data
-
-        return (
-            <div>
-                <Helmet>
-                    <title>Sam's TechBlog - {category.name}</title>
-                </Helmet>
-                <h1>{category.name}</h1>
-                <div>
-                    {this.state.data.recent_posts.map((post, key) => {
-                        return (
-                            <div key={key}>
-                                <a href={`/blog/posts/${post.slug}`}>{post.title}</a>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
-        )
-    }
-}
-
-const RoutedBlogHome = withRouter(BlogHome);
-
-export {
-    RoutedBlogHome as BlogHome,
-    Categories,
-    Category
-};
+export default withRouter(BlogHome);

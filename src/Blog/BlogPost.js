@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Butter from 'buttercms'
 import { Helmet } from "react-helmet";
 import { withRouter } from 'react-router-dom';
+import { DiscussionEmbed } from 'disqus-react';
+
 
 import './BlogPost.css';
 
@@ -42,6 +44,16 @@ class BlogPost extends Component {
 
                     <h1 className="post-title">{post.title}</h1>
                     <article className="post-body" dangerouslySetInnerHTML={{__html: post.body}} />
+                    <DiscussionEmbed
+                        shortname='sams-techblog'
+                        config={
+                            {
+                                identifier: post.id,
+                                title: post.title,
+                                language: 'fr_FR' //e.g. for Traditional Chinese (Taiwan)
+                            }
+                        }
+                    />
                 </div>
             );
         } else {
