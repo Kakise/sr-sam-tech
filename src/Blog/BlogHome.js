@@ -5,6 +5,7 @@ import {Helmet} from "react-helmet";
 import './BlogHome.css';
 
 const Header = React.lazy(() => import('./partial/Header'))
+const Sidebar = React.lazy(() => import('./partial/Sidebar'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 class BlogHome extends Component {
@@ -36,30 +37,34 @@ class BlogHome extends Component {
             const { next_page, previous_page } = this.state.resp.meta;
 
             return (
-                <div>
+                <div className="grid">
                     <Helmet>
                         <title>Sam's TechBlog - Accueil</title>
                     </Helmet>
                     <Suspense fallback={<div className="loading">Loading...</div>}>
                         <Header />
+                        <Sidebar />
                     </Suspense>
-                    {this.state.resp.data.map((post) => {
-                        return (
-                            <div className="post-element" key={post.slug}>
-                                <div className="post-link">
-                                    <Link to={`/post/${post.slug}`}>{post.title}</Link>
+
+                    <div className="blogHome">
+                        {this.state.resp.data.map((post) => {
+                            return (
+                                <div className="post-element" key={post.slug}>
+                                    <div className="post-link">
+                                        <Link to={`/post/${post.slug}`}>{post.title}</Link>
+                                    </div>
+                                    <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
                                 </div>
-                                <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
 
-                    <br />
+                        <br />
 
-                    <div>
-                        {previous_page && <Link to={`/p/${previous_page}`}>Prev</Link>}
+                        <div>
+                            {previous_page && <Link to={`/p/${previous_page}`}>Prev</Link>}
 
-                        {next_page && <Link to={`/p/${next_page}`}>Next</Link>}
+                            {next_page && <Link to={`/p/${next_page}`}>Next</Link>}
+                        </div>
                     </div>
                 </div>
             );
