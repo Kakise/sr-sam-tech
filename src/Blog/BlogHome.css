@@ -18,6 +18,7 @@
     top: 0;
     left: 0;
     transition: box-shadow 1s, left 1s, top 1s;
+    margin-top: 7px;
 }
 
 .post-element:hover {

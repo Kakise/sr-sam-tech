@@ -1,6 +1,7 @@
 import React, {Component, Suspense} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
+import './Categories.css';
 
 const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))
@@ -17,7 +18,7 @@ class Categories extends Component {
     }
     render () {
         return (
-            <div>
+            <div className="grid">
                 <Helmet>
                     <title>Sam's TechBlog - Catégories</title>
                 </Helmet>
@@ -25,14 +26,16 @@ class Categories extends Component {
                     <Header />
                     <Sidebar />
                 </Suspense>
-
-                {this.state.data.map((category, key) => {
-                    return (
-                        <div key={key}>
-                            <a href={`/blog/category/${category.slug}`}>{category.name}</a>
-                        </div>
-                    )
-                })}
+                <div className="categories">
+                    <h1>Liste des catégories</h1>
+                    {this.state.data.map((category, key) => {
+                        return (
+                            <div key={key}>
+                                <a href={`/blog/category/${category.slug}`}>{category.name}</a>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         )
     }

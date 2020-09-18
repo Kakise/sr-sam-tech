@@ -16,6 +16,13 @@ class Sidebar extends Component {
                         </Link>
                     </li>
                     <li>
+                    <Link to="/blog/categories">
+                        <div className="box">
+                            Catégories
+                        </div>
+                    </Link>
+                </li>
+                    <li>
                         <a href="https://twitter.com/STaaissat">
                             <div style={{float: 'left'}} className="box">
                                 <svg viewBox="0 0 24 24" width="1em" height="1em"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66
