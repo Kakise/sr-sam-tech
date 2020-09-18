@@ -4,7 +4,7 @@ import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
 import './BlogHome.css';
 
-const Header = React.lazy(() => import('./Header'))
+const Header = React.lazy(() => import('./partial/Header'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 class BlogHome extends Component {
@@ -45,8 +45,8 @@ class BlogHome extends Component {
                     </Suspense>
                     {this.state.resp.data.map((post) => {
                         return (
-                            <div className="post-element">
-                                <div className="post-link" key={post.slug}>
+                            <div className="post-element" key={post.slug}>
+                                <div className="post-link">
                                     <Link to={`/post/${post.slug}`}>{post.title}</Link>
                                 </div>
                                 <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
