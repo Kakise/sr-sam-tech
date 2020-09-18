@@ -47,6 +47,7 @@ class BlogHome extends Component {
                     </Suspense>
 
                     <div className="blogHome">
+                        <h1>Articles</h1>
                         {this.state.resp.data.map((post) => {
                             return (
                                 <div className="post-element" key={post.slug}>

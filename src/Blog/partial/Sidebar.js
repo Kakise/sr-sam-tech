@@ -6,6 +6,13 @@ class Sidebar extends Component {
         return (
             <div className="sidebar">
                 <h1>Sidebar</h1>
+                <ul>
+                    <li>
+                        <div className="box">
+                            TEST
+                        </div>
+                    </li>
+                </ul>
             </div>
         );
     }

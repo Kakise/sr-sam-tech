@@ -1,7 +1,7 @@
 .grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: 0.5fr 1fr;
     grid-column-gap: 0;
     grid-row-gap: 0;
 }
@@ -11,9 +11,21 @@
 }
 
 .post-element {
-    border: solid 2px rgba(0, 0, 0, .6);
+    border: solid 4px rgba(0, 0, 0, .6);
     padding: 15px;
     box-shadow: 3px 3px rgba(0, 0, 150, .1);
+    position: relative;
+    top: 0;
+    left: 0;
+    transition: box-shadow 1s, left 1s, top 1s;
+}
+
+.post-element:hover {
+    border: solid 4px rgba(0, 0, 0, .6);
+    padding: 15px;
+    box-shadow: 8px 8px rgba(0, 0, 150, .1);
+    top: -5px;
+    left: -5px;
 }
 
 .post-link {
