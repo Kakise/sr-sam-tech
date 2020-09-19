@@ -38,7 +38,7 @@ class Category extends Component {
                         {this.state.data.recent_posts.map((post, key) => {
                             return (
                                 <div key={key}>
-                                    <a href={`/blog/posts/${post.slug}`}>{post.title}</a>
+                                    <a href={`/post/${post.slug}`}>{post.title}</a>
                                 </div>
                             )
                         })}
