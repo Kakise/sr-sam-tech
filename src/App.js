@@ -5,6 +5,7 @@ import './App.css';
 const BlogHome = React.lazy(() =>  import('./Blog/BlogHome'));
 const BlogPost = React.lazy(() =>  import('./Blog/BlogPost'));
 const Categories = React.lazy(() =>  import('./Blog/Categories'));
+const Footer = React.lazy(() =>  import('./Blog/partial/Footer'));
 const Category = React.lazy(() =>  import('./Blog/Category'));
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                         <Route path="/blog/category/:category" component={Category} />
                     </Switch>
                 </Router>
+                <Footer />
             </Suspense>
         </main>
     )

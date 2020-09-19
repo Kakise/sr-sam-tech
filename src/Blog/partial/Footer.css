@@ -1,0 +1,13 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.butter {
+    background-image: url('./butter-b.png');
+    background-size: cover;
+    color: rgba(0, 0, 0, 0);
+}

@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component, Suspense} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from 'react-helmet';
+import './Categories.css';
 
+const Header = React.lazy(() => import('./partial/Header'))
+const Sidebar = React.lazy(() => import('./partial/Sidebar'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 class Category extends Component {
@@ -21,19 +24,25 @@ class Category extends Component {
         const category = this.state.data
 
         return (
-            <div>
+            <div className="grid">
                 <Helmet>
-                    <title>Sam's TechBlog - {category.name}</title>
+                    <title>{ `Sam's TechBlog - ${ category.name }` }</title>
                 </Helmet>
-                <h1>{category.name}</h1>
-                <div>
-                    {this.state.data.recent_posts.map((post, key) => {
-                        return (
-                            <div key={key}>
-                                <a href={`/blog/posts/${post.slug}`}>{post.title}</a>
-                            </div>
-                        )
-                    })}
+                <Suspense fallback={<div className="loading">Loading...</div>}>
+                    <Header />
+                    <Sidebar />
+                </Suspense>
+                <div className="categories">
+                    <h1>{category.name}</h1>
+                    <div>
+                        {this.state.data.recent_posts.map((post, key) => {
+                            return (
+                                <div key={key}>
+                                    <a href={`/blog/posts/${post.slug}`}>{post.title}</a>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         )

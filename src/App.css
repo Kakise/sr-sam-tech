@@ -1,5 +1,15 @@
+html {
+  background-color: rgba(72, 119, 255, 0.05);
+}
+
+body {
+  margin-bottom: 50px;
+}
 main {
-  margin: 20px;
+  margin: 0 0 0 0;
+  padding: 20px;
+  position: relative;
+  min-height: 90vh;
 }
 
 .loading {
