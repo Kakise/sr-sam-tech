@@ -30,5 +30,9 @@
 }
 
 .post-link {
+    font-family: 'Marmelad', sans-serif;
+}
 
+.post-excerpt {
+    font-family: 'Times New Roman';
 }

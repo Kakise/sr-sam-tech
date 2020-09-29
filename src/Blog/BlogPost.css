@@ -2,3 +2,23 @@
     width: 80%;
     margin: auto;
 }
+
+.post-link, .post-title {
+    font-family: 'Marmelad', sans-serif;
+}
+
+.post-body {
+    font-family: 'Times New Roman';
+}
+
+.box {
+    border: solid 4px rgba(0, 0, 0, .6);
+    padding: 7px;
+    box-shadow: 3px 3px rgba(0, 0, 150, .1);
+    position: relative;
+    top: 0;
+    left: 0;
+    width: fit-content;
+    transition: box-shadow 1s, left 1s, top 1s;
+    font-family: 'Marmelad', sans-serif;
+}

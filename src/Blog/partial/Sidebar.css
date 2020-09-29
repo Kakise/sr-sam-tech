@@ -11,6 +11,7 @@
     left: 0;
     width: fit-content;
     transition: box-shadow 1s, left 1s, top 1s;
+    font-family: 'Marmelad', sans-serif;
 }
 
 .box:hover {
