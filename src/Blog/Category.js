@@ -1,7 +1,8 @@
 import React, {Component, Suspense} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from 'react-helmet';
-import './Categories.css';
+import {Link} from "react-router-dom";
+import './Category.css';
 
 const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))
@@ -37,8 +38,11 @@ class Category extends Component {
                     <div>
                         {this.state.data.recent_posts.map((post, key) => {
                             return (
-                                <div key={key}>
-                                    <a href={`/blog/posts/${post.slug}`}>{post.title}</a>
+                                <div className="post-element" key={key}>
+                                    <div className="post-link">
+                                        <Link to={`/post/${post.slug}`}>{post.title}</Link>
+                                    </div>
+                                    <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
                                 </div>
                             )
                         })}

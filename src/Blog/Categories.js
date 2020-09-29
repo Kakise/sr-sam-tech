@@ -1,6 +1,7 @@
 import React, {Component, Suspense} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
+import {Link} from 'react-router-dom';
 import './Categories.css';
 
 const Header = React.lazy(() => import('./partial/Header'))
@@ -30,8 +31,8 @@ class Categories extends Component {
                     <h1>Liste des catégories</h1>
                     {this.state.data.map((category, key) => {
                         return (
-                            <div key={key}>
-                                <a href={`/blog/category/${category.slug}`}>{category.name}</a>
+                            <div className="box" key={key}>
+                                <Link to={`/blog/category/${category.slug}`}>{category.name}</Link>
                             </div>
                         )
                     })}
