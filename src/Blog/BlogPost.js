@@ -52,8 +52,9 @@ class BlogPost extends Component {
                         config={
                             {
                                 identifier: post.id,
+                                url: 'https://sr-sam.tech/post/' + post.url,
                                 title: post.title,
-                                language: 'fr_FR' //e.g. for Traditional Chinese (Taiwan)
+                                language: 'fr' //e.g. for Traditional Chinese (Taiwan)
                             }
                         }
                     />

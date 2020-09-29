@@ -33,6 +33,10 @@
     font-family: 'Marmelad', sans-serif;
 }
 
-.post-excerpt {
+.post-excerpt, .comments {
     font-family: 'Times New Roman';
+}
+
+.comments {
+    text-align: right;
 }

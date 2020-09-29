@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
+import { CommentCount } from 'disqus-react';
 import './BlogHome.css';
 
 const Header = React.lazy(() => import('./partial/Header'))
@@ -55,6 +56,20 @@ class BlogHome extends Component {
                                         <Link to={`/post/${post.slug}`}>{post.title}</Link>
                                     </div>
                                     <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
+                                    <div className="comments">
+                                        <CommentCount
+                                            shortname='sams-techblog'
+                                            config={
+                                                {
+                                                    url: 'https://sr-sam.tech/post/' + post.slug,
+                                                    identifier: post.id,
+                                                    title: post.title
+                                                }
+                                            }
+                                        >
+                                            Commentaires
+                                        </CommentCount>
+                                    </div>
                                 </div>
                             )
                         })}
