@@ -7,7 +7,7 @@
 }
 
 .butter {
-    background-image: url('./butter-b.png');
+    background-image: url('../res/butter-b.webp');
     background-size: cover;
     color: rgba(0, 0, 0, 0);
 }
