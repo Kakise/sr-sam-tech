@@ -8,6 +8,20 @@ const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
+function loadPage(name) {
+    return(
+        <>
+            <Helmet>
+                <title>{ `Sam's TechBlog - ${ name }` }</title>
+            </Helmet>
+            <Suspense fallback={<div className="loading">Loading...</div>}>
+                <Header />
+                <Sidebar />
+            </Suspense>
+        </>
+    )
+}
+
 class Category extends Component {
     state = {
         data: {
@@ -24,20 +38,9 @@ class Category extends Component {
     render () {
         const category = this.state.data;
 
-        let noPosts = false;
-        if (this.state.data.recent_posts.length === 0)
-            noPosts = true;
-
-
         return (
             <div className="grid">
-                <Helmet>
-                    <title>{ `Sam's TechBlog - ${ category.name }` }</title>
-                </Helmet>
-                <Suspense fallback={<div className="loading">Loading...</div>}>
-                    <Header />
-                    <Sidebar />
-                </Suspense>
+                {loadPage(category.name)}
                 <div className="categories">
                     <h1>{category.name}</h1>
                     <div>
@@ -51,7 +54,7 @@ class Category extends Component {
                                 </div>
                             )
                         })}
-                        {noPosts &&
+                        {category.recent_posts.length === 0 &&
                             <h2>Aucun article dans cette catégorie</h2>
                         }
                     </div>

@@ -9,6 +9,20 @@ const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
+function loadPage() {
+    return(
+        <>
+            <Helmet>
+                <title>Sam's TechBlog - Accueil</title>
+            </Helmet>
+            <Suspense fallback={<div className="loading">Loading...</div>}>
+                <Header />
+                <Sidebar />
+            </Suspense>
+        </>
+    )
+}
+
 class SearchResults extends Component {
     constructor(props) {
         super(props);
@@ -35,20 +49,9 @@ class SearchResults extends Component {
     render() {
         if (this.state.loaded) {
 
-            let noPosts = false;
-            if (this.state.resp.data.length === 0)
-                noPosts = true;
-
             return (
                 <div className="grid">
-                    <Helmet>
-                        <title>Sam's TechBlog - Accueil</title>
-                    </Helmet>
-                    <Suspense fallback={<div className="loading">Loading...</div>}>
-                        <Header />
-                        <Sidebar />
-                    </Suspense>
-
+                    {loadPage()}
                     <div className="blogHome">
                         <h1>Résultats correspondants à : "{this.state.query}"</h1>
                         {this.state.resp.data.map((post) => {
@@ -75,7 +78,7 @@ class SearchResults extends Component {
                                 </div>
                             )
                         })}
-                        {noPosts &&
+                        {this.state.resp.data.length === 0 &&
                             <h2>Aucun article ne correspond à votre recherche</h2>
                         }
                     </div>

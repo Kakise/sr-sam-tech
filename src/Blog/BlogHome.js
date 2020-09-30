@@ -9,6 +9,20 @@ const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
+function loadPage() {
+    return(
+        <>
+            <Helmet>
+                <title>Sam's TechBlog - Accueil</title>
+            </Helmet>
+            <Suspense fallback={<div className="loading">Loading...</div>}>
+                <Header />
+                <Sidebar />
+            </Suspense>
+        </>
+    )
+}
+
 class BlogHome extends Component {
     constructor(props) {
         super(props);
@@ -39,14 +53,7 @@ class BlogHome extends Component {
 
             return (
                 <div className="grid">
-                    <Helmet>
-                        <title>Sam's TechBlog - Accueil</title>
-                    </Helmet>
-                    <Suspense fallback={<div className="loading">Loading...</div>}>
-                        <Header />
-                        <Sidebar />
-                    </Suspense>
-
+                    {loadPage()}
                     <div className="blogHome">
                         <h1>Articles</h1>
                         {this.state.resp.data.map((post) => {
