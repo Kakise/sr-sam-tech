@@ -7,7 +7,7 @@
 }
 
 .blogHome {
-    grid-area: 2 / 2 / 3 / 7;;
+    grid-area: 2 / 2 / 3 / 7;
 }
 
 .post-element {
@@ -34,7 +34,7 @@
 }
 
 .post-excerpt, .comments {
-    font-family: 'Times New Roman';
+    font-family: 'Times New Roman', serif;
 }
 
 .comments {

@@ -1,15 +1,15 @@
-import React, { Component, Suspense } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import Butter from 'buttercms';
+import React, {Component, Suspense} from 'react';
+import Butter from 'buttercms'
 import {Helmet} from "react-helmet";
-import { CommentCount } from 'disqus-react';
+import {Link} from "react-router-dom";
+import {CommentCount} from "disqus-react";
 import './BlogHome.css';
 
 const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
-class BlogHome extends Component {
+class SearchResults extends Component {
     constructor(props) {
         super(props);
 
@@ -18,8 +18,12 @@ class BlogHome extends Component {
         };
     }
 
-    fetchPosts(page) {
-        butter.post.list({page: page, page_size: 10}).then((resp) => {
+    componentDidMount() {
+        const search = this.props.location.search; // could be '?foo=bar'
+        const params = new URLSearchParams(search);
+        const query = params.get('q'); // bar
+
+        butter.post.search(query, {page: 1, page_size: 100}).then((resp) => {
             this.setState({
                 loaded: true,
                 resp: resp.data
@@ -27,15 +31,8 @@ class BlogHome extends Component {
         });
     }
 
-    componentDidMount() {
-        const page = this.props.match.params.page;
-
-        this.fetchPosts(page)
-    }
-
     render() {
         if (this.state.loaded) {
-            const { next_page, previous_page } = this.state.resp.meta;
 
             return (
                 <div className="grid">
@@ -48,7 +45,7 @@ class BlogHome extends Component {
                     </Suspense>
 
                     <div className="blogHome">
-                        <h1>Articles</h1>
+                        <h1>Résultats</h1>
                         {this.state.resp.data.map((post) => {
                             return (
                                 <div className="post-element" key={post.slug}>
@@ -75,12 +72,6 @@ class BlogHome extends Component {
                         })}
 
                         <br />
-
-                        <div>
-                            {previous_page && <Link to={`/p/${previous_page}`}>Prev</Link>}
-
-                            {next_page && <Link to={`/p/${next_page}`}>Next</Link>}
-                        </div>
                     </div>
                 </div>
             );
@@ -94,4 +85,4 @@ class BlogHome extends Component {
     }
 }
 
-export default withRouter(BlogHome);
+export default SearchResults;

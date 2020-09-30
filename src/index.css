@@ -6,6 +6,7 @@
   src: url('./Blog/res/fonts/secular-one-v5-latin-regular.eot'); /* IE9 Compat Modes */
   src: local('Secular One'), local('SecularOne-Regular'),
   url('./Blog/res/fonts/secular-one-v5-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('./Blog/res/fonts/secular-one-v5-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */ url('./Blog/res/fonts/secular-one-v5-latin-regular.woff') format('woff'), /* Modern Browsers */ url('./Blog/res/fonts/secular-one-v5-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */ url('./Blog/res/fonts/secular-one-v5-latin-regular.svg#SecularOne') format('svg'); /* Legacy iOS */
+  font-display: swap;
 }
 
 /* marmelad-regular - latin */
@@ -20,12 +21,13 @@
   url('./Blog/res/fonts/marmelad-v10-latin-regular.woff') format('woff'), /* Modern Browsers */
   url('./Blog/res/fonts/marmelad-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
   url('./Blog/res/fonts/marmelad-v10-latin-regular.svg#Marmelad') format('svg'); /* Legacy iOS */
+  font-display: swap;
 }
 
 /* Website */
 body {
   margin: 0;
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', serif;
   font-size: large;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

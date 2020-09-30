@@ -51,10 +51,10 @@ class BlogPost extends Component {
                         shortname='sams-techblog'
                         config={
                             {
-                                identifier: post.id,
-                                url: 'https://sr-sam.tech/post/' + post.url,
+                                identifier: post.slug,
+                                url: post.url,
                                 title: post.title,
-                                language: 'fr' //e.g. for Traditional Chinese (Taiwan)
+                                language: 'fr'
                             }
                         }
                     />
