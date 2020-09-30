@@ -1,6 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marmelad&display=swap');
+/* secular-one-regular - latin */
+@font-face {
+  font-family: 'Secular One';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./Blog/res/fonts/secular-one-v5-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Secular One'), local('SecularOne-Regular'),
+  url('./Blog/res/fonts/secular-one-v5-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('./Blog/res/fonts/secular-one-v5-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */ url('./Blog/res/fonts/secular-one-v5-latin-regular.woff') format('woff'), /* Modern Browsers */ url('./Blog/res/fonts/secular-one-v5-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */ url('./Blog/res/fonts/secular-one-v5-latin-regular.svg#SecularOne') format('svg'); /* Legacy iOS */
+}
 
+/* marmelad-regular - latin */
+@font-face {
+  font-family: 'Marmelad';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./Blog/res/fonts/marmelad-v10-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Marmelad'), local('Marmelad-Regular'),
+  url('./Blog/res/fonts/marmelad-v10-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('./Blog/res/fonts/marmelad-v10-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+  url('./Blog/res/fonts/marmelad-v10-latin-regular.woff') format('woff'), /* Modern Browsers */
+  url('./Blog/res/fonts/marmelad-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+  url('./Blog/res/fonts/marmelad-v10-latin-regular.svg#Marmelad') format('svg'); /* Legacy iOS */
+}
+
+/* Website */
 body {
   margin: 0;
   font-family: 'Times New Roman';
