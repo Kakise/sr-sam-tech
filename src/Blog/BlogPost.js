@@ -79,7 +79,7 @@ class BlogPost extends Component {
                 </div>
             );
         } else {
-            loadingDiv();
+            return loadingDiv();
         }
     }
 }
