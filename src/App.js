@@ -5,9 +5,9 @@ import './App.css';
 const BlogHome = React.lazy(() =>  import('./Blog/BlogHome'));
 const BlogPost = React.lazy(() =>  import('./Blog/BlogPost'));
 const Categories = React.lazy(() =>  import('./Blog/Categories'));
-const Footer = React.lazy(() =>  import('./Blog/partial/Footer'));
 const Category = React.lazy(() =>  import('./Blog/Category'));
 const SearchResults = React.lazy(() =>  import('./Blog/SearchResults'));
+const Footer = React.lazy(() =>  import('./Blog/partial/Footer'));
 
 
 function App() {
