@@ -25,6 +25,15 @@ function loadPage(name, desc, featured_image) {
         </>
     )
 }
+
+function loadingDiv() {
+    return (
+        <div className="loading">
+            Loading...
+        </div>
+    );
+}
+
 class BlogPost extends Component {
 
     constructor(props) {
@@ -70,11 +79,7 @@ class BlogPost extends Component {
                 </div>
             );
         } else {
-            return (
-                <div className="loading">
-                    Loading...
-                </div>
-            );
+            loadingDiv();
         }
     }
 }
