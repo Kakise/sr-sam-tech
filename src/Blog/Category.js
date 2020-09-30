@@ -22,7 +22,12 @@ class Category extends Component {
         this.setState(resp.data)
     }
     render () {
-        const category = this.state.data
+        const category = this.state.data;
+
+        let noPosts = false;
+        if (this.state.data.recent_posts.length === 0)
+            noPosts = true;
+
 
         return (
             <div className="grid">
@@ -36,9 +41,9 @@ class Category extends Component {
                 <div className="categories">
                     <h1>{category.name}</h1>
                     <div>
-                        {this.state.data.recent_posts.map((post, key) => {
+                        {category.recent_posts.map((post, key) => {
                             return (
-                                <div className="post-element" key={key}>
+                                <div className="post-element" key={key} onClick={() => {window.location.href = `/post/${post.slug}`;}}>
                                     <div className="post-link">
                                         <Link to={`/post/${post.slug}`}>{post.title}</Link>
                                     </div>
@@ -46,6 +51,9 @@ class Category extends Component {
                                 </div>
                             )
                         })}
+                        {noPosts &&
+                            <h2>Aucun article dans cette catégorie</h2>
+                        }
                     </div>
                 </div>
             </div>

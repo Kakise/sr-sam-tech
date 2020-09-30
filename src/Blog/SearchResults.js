@@ -19,20 +19,25 @@ class SearchResults extends Component {
     }
 
     componentDidMount() {
-        const search = this.props.location.search; // could be '?foo=bar'
+        const search = this.props.location.search;
         const params = new URLSearchParams(search);
-        const query = params.get('q'); // bar
+        const query = params.get('q');
 
         butter.post.search(query, {page: 1, page_size: 100}).then((resp) => {
             this.setState({
                 loaded: true,
-                resp: resp.data
+                resp: resp.data,
+                query: query
             })
         });
     }
 
     render() {
         if (this.state.loaded) {
+
+            let noPosts = false;
+            if (this.state.resp.data.length === 0)
+                noPosts = true;
 
             return (
                 <div className="grid">
@@ -45,7 +50,7 @@ class SearchResults extends Component {
                     </Suspense>
 
                     <div className="blogHome">
-                        <h1>Résultats</h1>
+                        <h1>Résultats correspondants à : "{this.state.query}"</h1>
                         {this.state.resp.data.map((post) => {
                             return (
                                 <div className="post-element" key={post.slug}>
@@ -70,8 +75,9 @@ class SearchResults extends Component {
                                 </div>
                             )
                         })}
-
-                        <br />
+                        {noPosts &&
+                            <h2>Aucun article ne correspond à votre recherche</h2>
+                        }
                     </div>
                 </div>
             );

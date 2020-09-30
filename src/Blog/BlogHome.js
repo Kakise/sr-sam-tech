@@ -51,7 +51,7 @@ class BlogHome extends Component {
                         <h1>Articles</h1>
                         {this.state.resp.data.map((post) => {
                             return (
-                                <div className="post-element" key={post.slug}>
+                                <div className="post-element" key={post.slug} onClick={() => {window.location.href = `/post/${post.slug}`}}>
                                     <div className="post-link">
                                         <Link to={`/post/${post.slug}`}>{post.title}</Link>
                                     </div>

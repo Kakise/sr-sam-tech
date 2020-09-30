@@ -41,9 +41,11 @@ class BlogPost extends Component {
                         <meta name="description" content={post.meta_description} />
                         <meta name="og:image" content={post.featured_image} />
                     </Helmet>
-                    <div className="box">
-                        <Link to="/">&lt;- Accueil</Link>
-                    </div>
+                    <Link to="/">
+                        <div className="box">
+                            <span>&lt;- Accueil</span>
+                        </div>
+                    </Link>
                     <h1 className="post-title">{post.title}</h1>
                     <article className="post-body" dangerouslySetInnerHTML={{__html: post.body}} />
                     <br />

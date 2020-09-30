@@ -31,9 +31,11 @@ class Categories extends Component {
                     <h1>Liste des catégories</h1>
                     {this.state.data.map((category, key) => {
                         return (
-                            <div className="box" key={key}>
-                                <Link to={`/blog/category/${category.slug}`}>{category.name}</Link>
-                            </div>
+                            <Link to={`/blog/category/${category.slug}`}>
+                                <div className="box" key={key}>
+                                    <span>{category.name}</span>
+                                </div>
+                            </Link>
                         )
                     })}
                 </div>
