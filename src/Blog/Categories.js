@@ -14,8 +14,17 @@ class Categories extends Component {
         data: []
     }
     async componentDidMount () {
-        const resp = await butter.category.list()
-        this.setState(resp.data)
+        const cache = JSON.parse(sessionStorage.getItem("categories"));
+
+        if (!cache) {
+            const resp = await butter.category.list()
+            this.setState(resp.data);
+            sessionStorage.setItem("categories", JSON.stringify(this.state.data));
+        } else {
+            this.setState({data: cache});
+            console.log("Page loaded from cache");
+        }
+
     }
     render () {
         return (

@@ -33,12 +33,23 @@ class BlogHome extends Component {
     }
 
     fetchPosts(page) {
-        butter.post.list({page: page, page_size: 10}).then((resp) => {
+        const cache = JSON.parse(sessionStorage.getItem("home"));
+
+        if (!cache) {
+            butter.post.list({page: page, page_size: 10}).then((resp) => {
+                this.setState({
+                    loaded: true,
+                    resp: resp.data
+                })
+                sessionStorage.setItem("home", JSON.stringify(this.state.resp));
+            });
+        } else {
             this.setState({
                 loaded: true,
-                resp: resp.data
+                resp: cache
             })
-        });
+            console.log("Page loaded from cache");
+        }
     }
 
     componentDidMount() {

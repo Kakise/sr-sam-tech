@@ -36,14 +36,25 @@ class SearchResults extends Component {
         const search = this.props.location.search;
         const params = new URLSearchParams(search);
         const query = params.get('q');
+        const cache = JSON.parse(sessionStorage.getItem("search_" + query));
 
-        butter.post.search(query, {page: 1, page_size: 100}).then((resp) => {
+        if(!cache) {
+            butter.post.search(query, {page: 1, page_size: 100}).then((resp) => {
+                this.setState({
+                    loaded: true,
+                    resp: resp.data,
+                    query: query
+                })
+                sessionStorage.setItem("search_" + query, JSON.stringify(this.state.resp));
+            });
+        } else {
             this.setState({
                 loaded: true,
-                resp: resp.data,
+                resp: cache,
                 query: query
-            })
-        });
+            });
+            console.log("Post loaded from cache");
+        }
     }
 
     render() {

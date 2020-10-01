@@ -46,13 +46,24 @@ class BlogPost extends Component {
 
     componentDidMount() {
         const slug = this.props.match.params.slug;
+        const cache = JSON.parse(localStorage.getItem(slug));
 
-        butter.post.retrieve(slug).then((resp) => {
+        if (!cache) {
+            // Retrieve post if not in localStorage
+            butter.post.retrieve(slug).then((resp) => {
+                this.setState({
+                    loaded: true,
+                    post: resp.data.data
+                })
+                localStorage.setItem(slug, JSON.stringify(this.state.post));
+            });
+        } else {
             this.setState({
                 loaded: true,
-                post: resp.data.data
-            })
-        });
+                post: cache
+            });
+            console.log("Post loaded from cache");
+        }
     }
 
     render() {
