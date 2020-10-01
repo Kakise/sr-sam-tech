@@ -39,16 +39,24 @@ class BlogPost extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            loaded: false
-        };
-    }
-
-    componentDidMount() {
         const slug = this.props.match.params.slug;
         const cache = JSON.parse(localStorage.getItem(slug));
-
         if (!cache) {
+            this.state = {
+                loaded: false
+            };
+        } else {
+            this.state = {
+                loaded: true,
+                post: cache
+            };
+        }
+    }
+
+    async componentDidMount() {
+        const slug = this.props.match.params.slug;
+
+        if (!this.state.loaded) {
             // Retrieve post if not in localStorage
             butter.post.retrieve(slug).then((resp) => {
                 this.setState({
@@ -58,10 +66,6 @@ class BlogPost extends Component {
                 localStorage.setItem(slug, JSON.stringify(this.state.post));
             });
         } else {
-            this.setState({
-                loaded: true,
-                post: cache
-            });
             console.log("Post loaded from cache");
         }
     }

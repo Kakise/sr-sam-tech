@@ -29,16 +29,16 @@ class Sidebar extends Component {
                         {box("/blog/categories", "Catégories")}
                     </li>
                     <li>
-                        <Link to="https://twitter.com/STaaissat">
+                        <a href="https://twitter.com/STaaissat">
                             <div style={{float: 'left'}} className="box">
                                 <Twitter/>
                             </div>
-                        </Link>
-                        <Link to="https://github.com/Kakise">
+                        </a>
+                        <a href="https://github.com/Kakise">
                             <div style={{float: 'left', margin: '0 0 0 7px'}} className="box">
                                 <Github/>
                             </div>
-                        </Link>
+                        </a>
                     </li>
                 </ul>
             </div>

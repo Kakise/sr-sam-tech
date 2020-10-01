@@ -13,6 +13,7 @@ class Categories extends Component {
     state = {
         data: []
     }
+
     async componentDidMount () {
         const cache = JSON.parse(sessionStorage.getItem("categories"));
 

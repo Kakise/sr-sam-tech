@@ -27,33 +27,35 @@ class BlogHome extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            loaded: false
-        };
+        const page = this.props.match.params.page !== undefined ? this.props.match.params.page : 1;
+        const cache = JSON.parse(sessionStorage.getItem("home_"+page));
+        if (!cache) {
+            this.state = {
+                loaded: false
+            };
+        } else {
+            this.state = {
+                loaded: true,
+                resp: cache
+            };
+            console.log("Page loaded from cache");
+        }
     }
 
     fetchPosts(page) {
-        const cache = JSON.parse(sessionStorage.getItem("home"));
-
-        if (!cache) {
+        if (!this.state.loaded) {
             butter.post.list({page: page, page_size: 10}).then((resp) => {
                 this.setState({
                     loaded: true,
                     resp: resp.data
                 })
-                sessionStorage.setItem("home", JSON.stringify(this.state.resp));
+                sessionStorage.setItem("home_"+page, JSON.stringify(this.state.resp));
             });
-        } else {
-            this.setState({
-                loaded: true,
-                resp: cache
-            })
-            console.log("Page loaded from cache");
         }
     }
 
-    componentDidMount() {
-        const page = this.props.match.params.page;
+    async componentDidMount() {
+        const page = this.props.match.params.page !== undefined ? this.props.match.params.page : 1;
 
         this.fetchPosts(page)
     }
