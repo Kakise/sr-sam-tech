@@ -52,7 +52,8 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 // font preloading plugin
 const FontPreloadPlugin = require('webpack-font-preload-plugin');
-const Critters = require('critters-webpack-plugin');
+const AsyncCssPlugin = require("async-css-plugin");
+const CriticalCssPlugin = require('critical-css-webpack-plugin');
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -654,13 +655,14 @@ module.exports = function (webpackEnv) {
         formatter: isEnvProduction ? typescriptFormatter : undefined,
       }),
       // Preload the fonts
+      new CriticalCssPlugin({
+        base: 'build',
+      }),
       new FontPreloadPlugin({
         indexFile: 'index.html',
         extensions: ['woff', 'ttf', 'eot', 'woff2'],
       }),
-      new Critters({
-        // optional configuration (see below)
-      }),
+      new AsyncCssPlugin({ /* options */}),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell webpack to provide empty mocks for them so importing them works.
