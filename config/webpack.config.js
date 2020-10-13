@@ -655,6 +655,7 @@ module.exports = function (webpackEnv) {
       // Preload the fonts
       new FontPreloadPlugin({
         indexFile: 'index.html',
+        extensions: ['woff', 'ttf', 'eot', 'woff2'],
       }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
