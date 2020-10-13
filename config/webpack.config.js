@@ -52,6 +52,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 // font preloading plugin
 const FontPreloadPlugin = require('webpack-font-preload-plugin');
+const Critters = require('critters-webpack-plugin');
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -656,6 +657,9 @@ module.exports = function (webpackEnv) {
       new FontPreloadPlugin({
         indexFile: 'index.html',
         extensions: ['woff', 'ttf', 'eot', 'woff2'],
+      }),
+      new Critters({
+        // optional configuration (see below)
       }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.

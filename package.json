@@ -86,6 +86,7 @@
     ]
   },
   "devDependencies": {
+    "critters-webpack-plugin": "^2.5.0",
     "webpack-font-preload-plugin": "^1.0.1"
   },
   "jest": {
