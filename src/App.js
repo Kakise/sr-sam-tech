@@ -1,13 +1,15 @@
-import React, {Suspense}  from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './App.css';
+import React, {Suspense} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import loadCSS from 'loadcss';
 
-const BlogHome = React.lazy(() =>  import('./Blog/BlogHome'));
-const BlogPost = React.lazy(() =>  import('./Blog/BlogPost'));
-const Categories = React.lazy(() =>  import('./Blog/Categories'));
-const Category = React.lazy(() =>  import('./Blog/Category'));
-const SearchResults = React.lazy(() =>  import('./Blog/SearchResults'));
-const Footer = React.lazy(() =>  import('./Blog/partial/Footer'));
+loadCSS('./App.css');
+
+const BlogHome = React.lazy(() => import('./Blog/BlogHome'));
+const BlogPost = React.lazy(() => import('./Blog/BlogPost'));
+const Categories = React.lazy(() => import('./Blog/Categories'));
+const Category = React.lazy(() => import('./Blog/Category'));
+const SearchResults = React.lazy(() => import('./Blog/SearchResults'));
+const Footer = React.lazy(() => import('./Blog/partial/Footer'));
 
 
 function App() {

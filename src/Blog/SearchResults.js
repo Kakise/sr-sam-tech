@@ -3,14 +3,16 @@ import Butter from 'buttercms'
 import {Helmet} from "react-helmet";
 import {Link} from "react-router-dom";
 import {CommentCount} from "disqus-react";
-import './BlogHome.css';
+import loadCSS from 'loadcss';
+
+loadCSS('./BlogHome.css');
 
 const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 function loadPage() {
-    return(
+    return (
         <>
             <Helmet>
                 <title>Sam's TechBlog - Accueil</title>

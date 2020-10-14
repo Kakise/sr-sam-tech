@@ -2,17 +2,19 @@ import React, {Component, Suspense} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from 'react-helmet';
 import {Link} from "react-router-dom";
-import './Category.css';
+import loadCSS from 'loadcss';
+
+loadCSS('./Category.css');
 
 const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 function loadPage(name) {
-    return(
+    return (
         <>
             <Helmet>
-                <title>{ `Sam's TechBlog - ${ name }` }</title>
+                <title>{`Sam's TechBlog - ${name}`}</title>
             </Helmet>
             <Suspense fallback={<div className="loading">Loading...</div>}>
                 <Header />

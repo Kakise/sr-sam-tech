@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import './Footer.css';
+import loadCSS from 'loadcss';
+
+loadCSS('./Footer.css');
 
 class Footer extends Component {
-    render () {
+    render() {
         return (
             <footer className="footer">
-                <p>Copyright © 2020 - Sami T  |  Made using <a href="https://buttercms.com" className="butter">ButterCMS</a></p>
+                <p>Copyright © 2020 - Sami T | Made using <a href="https://buttercms.com"
+                                                             className="butter">ButterCMS</a></p>
             </footer>
         );
     }

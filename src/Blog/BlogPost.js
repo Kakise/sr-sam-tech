@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import Butter from 'buttercms'
-import { Helmet } from "react-helmet";
+import {Helmet} from "react-helmet";
 import {Link, withRouter} from 'react-router-dom';
-import { DiscussionEmbed } from 'disqus-react';
+import {DiscussionEmbed} from 'disqus-react';
+import loadCSS from 'loadcss';
 
 
-import './BlogPost.css';
+loadCSS('./BlogPost.css');
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 function loadPage(name, desc, featured_image) {
-    return(
+    return (
         <>
             <Helmet>
                 <title>{name}</title>
