@@ -3,10 +3,9 @@ import Butter from 'buttercms'
 import {Helmet} from "react-helmet";
 import {Link, withRouter} from 'react-router-dom';
 import {DiscussionEmbed} from 'disqus-react';
-import loadCSS from 'loadcss';
 
 
-loadCSS('./BlogPost.css');
+import './BlogPost.css';
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
@@ -15,8 +14,8 @@ function loadPage(name, desc, featured_image) {
         <>
             <Helmet>
                 <title>{name}</title>
-                <meta name="description" content={desc} />
-                <meta name="og:image" content={featured_image} />
+                <meta name="description" content={desc}/>
+                <meta name="og:image" content={featured_image}/>
             </Helmet>
             <Link to="/">
                 <div className="box">

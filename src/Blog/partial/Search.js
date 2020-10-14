@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import loadCSS from 'loadcss';
-
-loadCSS('./Search.css');
+import './Search.css';
 
 class SearchBar extends Component {
     render() {

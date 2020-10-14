@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-import loadCSS from 'loadcss';
+import './index.css';
 
 import App from './App';
-
-loadCSS('./index.css');
 
 ReactDOM.render(
     <BrowserRouter>

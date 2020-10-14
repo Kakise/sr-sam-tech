@@ -2,9 +2,7 @@ import React, {Component, Suspense} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
 import {Link} from 'react-router-dom';
-import loadCSS from 'loadcss';
-
-loadCSS('./Categories.css');
+import './Categories.css';
 
 const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))

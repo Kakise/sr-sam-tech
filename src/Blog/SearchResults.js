@@ -3,9 +3,7 @@ import Butter from 'buttercms'
 import {Helmet} from "react-helmet";
 import {Link} from "react-router-dom";
 import {CommentCount} from "disqus-react";
-import loadCSS from 'loadcss';
-
-loadCSS('./BlogHome.css');
+import './BlogHome.css';
 
 const Header = React.lazy(() => import('./partial/Header'))
 const Sidebar = React.lazy(() => import('./partial/Sidebar'))
@@ -18,8 +16,8 @@ function loadPage() {
                 <title>Sam's TechBlog - Accueil</title>
             </Helmet>
             <Suspense fallback={<div className="loading">Loading...</div>}>
-                <Header />
-                <Sidebar />
+                <Header/>
+                <Sidebar/>
             </Suspense>
         </>
     )

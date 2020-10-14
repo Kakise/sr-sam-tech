@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {ReactComponent as Github} from '../res/github.svg';
 import {ReactComponent as Twitter} from '../res/twitter.svg';
-import loadCSS from 'loadcss';
-
-loadCSS('./Sidebar.css');
+import './Sidebar.css';
 
 function box(link, text) {
     return (
