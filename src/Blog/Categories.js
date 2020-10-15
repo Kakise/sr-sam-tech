@@ -4,8 +4,8 @@ import {Helmet} from "react-helmet";
 import {Link} from 'react-router-dom';
 import './Categories.css';
 
-const Header = React.lazy(() => import('./partial/Header'))
-const Sidebar = React.lazy(() => import('./partial/Sidebar'))
+const Header = React.lazy(() => import('./partial/Header'));
+const Sidebar = React.lazy(() => import('./partial/Sidebar'));
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 
@@ -14,7 +14,7 @@ class Categories extends Component {
         data: []
     }
 
-    async componentDidMount () {
+    async componentDidMount() {
         const cache = JSON.parse(sessionStorage.getItem("categories"));
 
         if (!cache) {

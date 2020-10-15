@@ -3,10 +3,13 @@ import {Link, withRouter} from 'react-router-dom';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
 import {CommentCount} from 'disqus-react';
-import './BlogHome.css';
+import loadCSS from 'loadcss';
 
-const Header = React.lazy(() => import('./partial/Header'))
-const Sidebar = React.lazy(() => import('./partial/Sidebar'))
+loadCSS(import('./BlogHome.css'));
+
+
+const Header = React.lazy(() => import('./partial/Header'));
+const Sidebar = React.lazy(() => import('./partial/Sidebar'));
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 function loadPage() {
