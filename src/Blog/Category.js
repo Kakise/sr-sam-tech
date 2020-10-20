@@ -22,45 +22,88 @@ function loadPage(name) {
     )
 }
 
+function loadingDiv() {
+    return (
+        <div className="loading">
+            Loading...
+        </div>
+    );
+}
+
 class Category extends Component {
-    state = {
-        data: {
-            recent_posts: []
+    constructor(props) {
+        super(props);
+
+        const {match} = this.props;
+        const cache = JSON.parse(localStorage.getItem("category_" + match.params.category));
+
+        if (!cache) {
+            this.state = {
+                loaded: false
+            };
+        } else if (Date.now() - cache.retrieved < 86400000) {
+            this.state = {
+                loaded: true,
+                resp: cache,
+            };
+            console.log("Page loaded from cache");
+            console.log("Page is " + (Date.now() - this.state.resp.retrieved).toString() + " ms old");
+        } else {
+            this.state = {
+                loaded: false,
+            };
+        }
+
+    }
+
+    async componentDidMount() {
+        if (!this.state.loaded) {
+            const {match} = this.props;
+            butter.category.retrieve(match.params.category, {
+                include: 'recent_posts'
+            }).then((resp) => {
+                resp.data.retrieved = Date.now();
+                this.setState({
+                    loaded: true,
+                    resp: resp.data,
+                });
+                localStorage.setItem("category_" + match.params.category, JSON.stringify(resp.data));
+            });
         }
     }
-    async componentDidMount () {
-        const { match } = this.props
-        const resp = await butter.category.retrieve(match.params.category, {
-            include: 'recent_posts'
-        })
-        this.setState(resp.data)
-    }
-    render () {
-        const category = this.state.data;
 
-        return (
-            <div className="grid">
-                {loadPage(category.name)}
-                <div className="categories">
-                    <h1>{category.name}</h1>
-                    <div>
-                        {category.recent_posts.map((post, key) => {
-                            return (
-                                <div className="post-element" key={key} onClick={() => {window.location.href = `/post/${post.slug}`;}}>
-                                    <div className="post-link">
-                                        <Link to={`/post/${post.slug}`}>{post.title}</Link>
+    render() {
+
+        if (this.state.loaded) {
+            const category = this.state.resp.data;
+            return (
+                <div className="grid">
+                    {loadPage(category.name)}
+                    <div className="categories">
+                        <h1>{category.name}</h1>
+                        <div>
+                            {category.recent_posts.map((post, key) => {
+                                return (
+                                    <div className="post-element" key={key} onClick={() => {
+                                        window.location.href = `/post/${post.slug}`;
+                                    }}>
+                                        <div className="post-link">
+                                            <Link to={`/post/${post.slug}`}>{post.title}</Link>
+                                        </div>
+                                        <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}}/>
                                     </div>
-                                    <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
-                                </div>
-                            )
-                        })}
-                        {category.recent_posts.length === 0 &&
+                                )
+                            })}
+                            {category.recent_posts.length === 0 &&
                             <h2>Aucun article dans cette catégorie</h2>
-                        }
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return loadingDiv();
+        }
     }
 }
 
