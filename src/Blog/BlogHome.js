@@ -3,10 +3,8 @@ import {Link, withRouter} from 'react-router-dom';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
 import {CommentCount} from 'disqus-react';
-import loadCSS from 'loadcss';
 
-loadCSS(import('./BlogHome.css'));
-
+import './BlogHome.css';
 
 const Header = React.lazy(() => import('./partial/Header'));
 const Sidebar = React.lazy(() => import('./partial/Sidebar'));
@@ -31,28 +29,35 @@ class BlogHome extends Component {
         super(props);
 
         const page = this.props.match.params.page !== undefined ? this.props.match.params.page : 1;
-        const cache = JSON.parse(sessionStorage.getItem("home_"+page));
+        const cache = JSON.parse(localStorage.getItem("home_" + page));
+
         if (!cache) {
             this.state = {
                 loaded: false
             };
-        } else {
+        } else if (Date.now() - cache.retrieved < 86400000) { // If cache is younger than a day
             this.state = {
                 loaded: true,
                 resp: cache
             };
             console.log("Page loaded from cache");
+            console.log("Page is " + (Date.now() - this.state.resp.retrieved).toString() + " ms old");
+        } else {
+            this.state = {
+                loaded: false
+            };
         }
     }
 
     fetchPosts(page) {
         if (!this.state.loaded) {
             butter.post.list({page: page, page_size: 10}).then((resp) => {
+                resp.data["retrieved"] = Date.now(); // Store cached date
                 this.setState({
                     loaded: true,
                     resp: resp.data
                 })
-                sessionStorage.setItem("home_"+page, JSON.stringify(this.state.resp));
+                localStorage.setItem("home_" + page, JSON.stringify(this.state.resp));
             });
         }
     }

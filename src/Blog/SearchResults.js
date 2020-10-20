@@ -3,9 +3,8 @@ import Butter from 'buttercms'
 import {Helmet} from "react-helmet";
 import {Link} from "react-router-dom";
 import {CommentCount} from "disqus-react";
-import loadCSS from 'loadcss';
 
-loadCSS(import('./BlogHome.css'));
+import './BlogHome.css';
 
 const Header = React.lazy(() => import('./partial/Header'));
 const Sidebar = React.lazy(() => import('./partial/Sidebar'));

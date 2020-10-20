@@ -41,14 +41,20 @@ class BlogPost extends Component {
 
         const slug = this.props.match.params.slug;
         const cache = JSON.parse(localStorage.getItem(slug));
+
+        // Idk how to code lmao
         if (!cache) {
             this.state = {
                 loaded: false
             };
-        } else {
+        } else if (Date.now() - cache.retrieved < 604800000) { // If cache is younger than a week
             this.state = {
                 loaded: true,
                 post: cache
+            };
+        } else {
+            this.state = {
+                loaded: false
             };
         }
     }
@@ -59,6 +65,7 @@ class BlogPost extends Component {
         if (!this.state.loaded) {
             // Retrieve post if not in localStorage
             butter.post.retrieve(slug).then((resp) => {
+                resp.data.data["retrieved"] = Date.now();
                 this.setState({
                     loaded: true,
                     post: resp.data.data
@@ -67,6 +74,7 @@ class BlogPost extends Component {
             });
         } else {
             console.log("Post loaded from cache");
+            console.log("Post is " + (Date.now() - this.state.post.retrieved).toString() + " ms old");
         }
     }
 
