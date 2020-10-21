@@ -2,7 +2,7 @@ import React, {Component, Suspense} from 'react';
 import Butter from 'buttercms'
 import {Helmet} from "react-helmet";
 import {Link} from "react-router-dom";
-import {CommentCount} from "disqus-react";
+import CommentCount from "./partial/CommentCount";
 
 import './BlogHome.css';
 
@@ -75,17 +75,11 @@ class SearchResults extends Component {
                                     <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
                                     <div className="comments">
                                         <CommentCount
-                                            shortname='sams-techblog'
-                                            config={
-                                                {
-                                                    url: post.url,
-                                                    identifier: post.slug,
-                                                    title: post.title
-                                                }
-                                            }
-                                        >
-                                            Commentaires
-                                        </CommentCount>
+                                            clientId='857362afdf6cb80d03d3'
+                                            clientSecret='eebbfa120cbea84c449100e592a48fe1dd521b23'
+                                            owner="Kakise"
+                                            repo="gitalk"
+                                            title={post.title}/>
                                     </div>
                                 </div>
                             )
