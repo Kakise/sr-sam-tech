@@ -99,17 +99,6 @@ class BlogPost extends Component {
                         language: 'fr',
                         distractionFreeMode: false  // Facebook-like distraction free mode
                     }}/>
-                    {/*<DiscussionEmbed
-                        shortname='sams-techblog'
-                        config={
-                            {
-                                identifier: post.slug,
-                                url: post.url,
-                                title: post.title,
-                                language: 'fr'
-                            }
-                        }
-                    />*/}
                 </div>
             );
         } else {
