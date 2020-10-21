@@ -95,6 +95,7 @@ class BlogPost extends Component {
                         repo: 'gitalk',      // The repository of store comments,
                         owner: 'Kakise',
                         admin: ['Kakise'],
+                        id: post.url.slice(0, 49),      // Ensure uniqueness and length less than 50
                         title: post.title,
                         language: 'fr',
                         distractionFreeMode: false  // Facebook-like distraction free mode
