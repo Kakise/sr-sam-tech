@@ -70,7 +70,7 @@ class BlogPost extends Component {
                     loaded: true,
                     post: resp.data.data
                 })
-                if (this.state.post.published === "published")
+                if (this.state.post.status === "published")
                     localStorage.setItem(slug, JSON.stringify(this.state.post));
             });
         } else {
