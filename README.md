@@ -1,4 +1,6 @@
-Blog personnel.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c469e0d3-6243-4597-829d-f4b53c676f7b/deploy-status)](https://app.netlify.com/sites/sr-sams-tech-blog/deploys)
+
+## Blog personnel
 
 Disponible à l'adresse https://sr-sam.tech
 
