@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import Butter from 'buttercms'
 import {Helmet} from "react-helmet";
 import {Link, withRouter} from 'react-router-dom';
-import {DiscussionEmbed} from 'disqus-react';
+import GitalkComponent from "gitalk/dist/gitalk-component";
 
-
+import 'gitalk/dist/gitalk.css'
 import './BlogPost.css';
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
@@ -86,9 +86,20 @@ class BlogPost extends Component {
                 <div className="post">
                     {loadPage(post.seo_title, post.meta_description, post.featured_image)}
                     <h1 className="post-title">{post.title}</h1>
-                    <article className="post-body" dangerouslySetInnerHTML={{__html: post.body}} />
-                    <br />
-                    <DiscussionEmbed
+                    <article className="post-body" dangerouslySetInnerHTML={{__html: post.body}}/>
+                    <br/>
+                    <GitalkComponent options={{
+                        clientID: '857362afdf6cb80d03d3',
+                        clientSecret: 'eebbfa120cbea84c449100e592a48fe1dd521b23',
+                        repo: 'gitalk',      // The repository of store comments,
+                        owner: 'Kakise',
+                        admin: ['Kakise'],
+                        id: post.url,      // Ensure uniqueness and length less than 50
+                        title: post.title,
+                        language: 'fr',
+                        distractionFreeMode: false  // Facebook-like distraction free mode
+                    }}/>
+                    {/*<DiscussionEmbed
                         shortname='sams-techblog'
                         config={
                             {
@@ -98,7 +109,7 @@ class BlogPost extends Component {
                                 language: 'fr'
                             }
                         }
-                    />
+                    />*/}
                 </div>
             );
         } else {
