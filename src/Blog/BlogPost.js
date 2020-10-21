@@ -70,7 +70,8 @@ class BlogPost extends Component {
                     loaded: true,
                     post: resp.data.data
                 })
-                localStorage.setItem(slug, JSON.stringify(this.state.post));
+                if (this.state.post.published === "published")
+                    localStorage.setItem(slug, JSON.stringify(this.state.post));
             });
         } else {
             console.log("Post loaded from cache");
