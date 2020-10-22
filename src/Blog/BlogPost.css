@@ -1,6 +1,7 @@
 .post {
     width: 80%;
     margin: auto;
+    padding-bottom: 20px;
 }
 
 .post-link, .post-title {
@@ -21,8 +22,4 @@
     width: fit-content;
     transition: box-shadow 1s, left 1s, top 1s;
     font-family: 'Marmelad', sans-serif;
-}
-
-.gt-container {
-    margin-bottom: 20px;
 }
