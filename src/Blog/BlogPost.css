@@ -9,7 +9,7 @@
 }
 
 .post-body {
-    font-family: 'Times New Roman';
+    font-family: 'Times New Roman', serif;
 }
 
 .box {
@@ -22,4 +22,10 @@
     width: fit-content;
     transition: box-shadow 1s, left 1s, top 1s;
     font-family: 'Marmelad', sans-serif;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+    font-size: medium;
 }
