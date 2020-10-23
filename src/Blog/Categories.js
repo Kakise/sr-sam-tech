@@ -1,9 +1,9 @@
 import React, {Component, Suspense} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
-import {Link} from 'react-router-dom';
 import Header from './partial/Header';
 import Sidebar from './partial/Sidebar';
+import LinkWithPreload from "./partial/LinkWithPreload";
 import './Categories.css';
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
@@ -69,11 +69,11 @@ class Categories extends Component {
                         <h1>Liste des catégories</h1>
                         {this.state.resp.data.map((category, key) => {
                             return (
-                                <Link to={`/blog/category/${category.slug}`} key={key}>
+                                <LinkWithPreload to={`/blog/category/${category.slug}`} key={key}>
                                     <div className="box">
                                         <span>{category.name}</span>
                                     </div>
-                                </Link>
+                                </LinkWithPreload>
                             )
                         })}
                     </div>
