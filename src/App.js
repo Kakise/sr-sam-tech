@@ -2,14 +2,29 @@ import React, {Suspense} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 
-const BlogHome = React.lazy(() => import('./Blog/BlogHome'));
-const BlogPost = React.lazy(() => import('./Blog/BlogPost'));
-const Categories = React.lazy(() => import('./Blog/Categories'));
-const Category = React.lazy(() => import('./Blog/Category'));
-const SearchResults = React.lazy(() => import('./Blog/SearchResults'));
-const Footer = React.lazy(() => import('./Blog/partial/Footer'));
-const BlogPage = React.lazy(() => import('./Blog/BlogPage'));
+const ReactLazyPreload = importStatement => {
+    const Component = React.lazy(importStatement);
+    Component.preload = importStatement;
+    return Component;
+};
 
+const BlogHome = ReactLazyPreload(() => import('./Blog/BlogHome'));
+const BlogPost = ReactLazyPreload(() => import('./Blog/BlogPost'));
+const Categories = ReactLazyPreload(() => import('./Blog/Categories'));
+const Category = ReactLazyPreload(() => import('./Blog/Category'));
+const SearchResults = ReactLazyPreload(() => import('./Blog/SearchResults'));
+const Footer = React.lazy(() => import('./Blog/partial/Footer'));
+const BlogPage = ReactLazyPreload(() => import('./Blog/BlogPage'));
+
+const routes = [
+    {path: "/", exact: true, component: BlogHome},
+    {path: "/p/:page", exact: true, component: BlogHome},
+    {path: "/results", exact: true, component: SearchResults},
+    {path: "/post/:slug", exact: true, component: BlogPost},
+    {path: "/blog/categories", exact: true, component: Categories},
+    {path: "/blog/category/:category", exact: true, component: Category},
+    {path: "/:page", exact: true, component: BlogPage}
+];
 
 function App() {
     return (
@@ -17,13 +32,14 @@ function App() {
             <Suspense fallback={<div className="loading">Loading...</div>}>
                 <Router>
                     <Switch>
-                        <Route exact path="/" component={BlogHome}/>
-                        <Route path="/p/:page" component={BlogHome}/>
-                        <Route path="/results" component={SearchResults}/>
-                        <Route path="/post/:slug" component={BlogPost}/>
-                        <Route path="/blog/categories" component={Categories}/>
-                        <Route path="/blog/category/:category" component={Category}/>
-                        <Route path="/:page" component={BlogPage}/>
+                        {routes.map(route => (
+                            <Route
+                                key={route.path}
+                                exact={route.exact}
+                                path={route.path}
+                                component={route.component}
+                            />
+                        ))}
                     </Switch>
                 </Router>
                 <Footer />
@@ -32,4 +48,4 @@ function App() {
     )
 }
 
-export default App;
+export {App as default, routes};

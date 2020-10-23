@@ -1,13 +1,12 @@
-import React, {Component, Suspense} from 'react';
+import React, {Component} from 'react';
 import Butter from 'buttercms'
 import {Helmet} from "react-helmet";
 import {Link} from "react-router-dom";
 import CommentCount from "./partial/CommentCount";
-
+import Header from './partial/Header';
+import Sidebar from './partial/Sidebar';
 import './BlogHome.css';
 
-const Header = React.lazy(() => import('./partial/Header'));
-const Sidebar = React.lazy(() => import('./partial/Sidebar'));
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 function loadPage() {
@@ -16,10 +15,8 @@ function loadPage() {
             <Helmet>
                 <title>Sam's TechBlog - Accueil</title>
             </Helmet>
-            <Suspense fallback={<div className="loading">Loading...</div>}>
-                <Header/>
-                <Sidebar/>
-            </Suspense>
+            <Header/>
+            <Sidebar/>
         </>
     )
 }
@@ -27,13 +24,9 @@ function loadPage() {
 class SearchResults extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            loaded: false
-        };
-    }
-
-    componentDidMount() {
+            query: null
+        }
         const search = this.props.location.search;
         const params = new URLSearchParams(search);
         const query = params.get('q');
@@ -41,26 +34,22 @@ class SearchResults extends Component {
 
         if(!cache) {
             butter.post.search(query, {page: 1, page_size: 100}).then((resp) => {
-                this.setState({
-                    loaded: true,
+                this.state = {
                     resp: resp.data,
                     query: query
-                })
+                };
                 sessionStorage.setItem("search_" + query, JSON.stringify(this.state.resp));
             });
         } else {
-            this.setState({
-                loaded: true,
+            this.state = {
                 resp: cache,
                 query: query
-            });
-            console.log("Post loaded from cache");
+            };
+            console.log("Query loaded from cache");
         }
     }
 
     render() {
-        if (this.state.loaded) {
-
             return (
                 <div className="grid">
                     {loadPage()}
@@ -90,13 +79,7 @@ class SearchResults extends Component {
                     </div>
                 </div>
             );
-        } else {
-            return (
-                <div className="loading">
-                    Loading...
-                </div>
-            )
-        }
+
     }
 }
 

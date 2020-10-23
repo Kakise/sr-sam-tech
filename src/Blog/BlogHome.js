@@ -1,13 +1,13 @@
-import React, {Component, Suspense} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
 import CommentCount from "./partial/CommentCount";
-
+import LinkWithPreload from "./partial/LinkWithPreload";
+import Header from './partial/Header';
+import Sidebar from './partial/Sidebar';
 import './BlogHome.css';
 
-const Header = React.lazy(() => import('./partial/Header'));
-const Sidebar = React.lazy(() => import('./partial/Sidebar'));
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 function loadPage() {
@@ -16,10 +16,8 @@ function loadPage() {
             <Helmet>
                 <title>Sam's TechBlog</title>
             </Helmet>
-            <Suspense fallback={<div className="loading">Loading...</div>}>
-                <Header/>
-                <Sidebar/>
-            </Suspense>
+            <Header/>
+            <Sidebar/>
         </>
     )
 }
@@ -79,11 +77,11 @@ class BlogHome extends Component {
                         <h1>Articles</h1>
                         {this.state.resp.data.map((post) => {
                             return (
-                                <div className="post-element" key={post.slug} onClick={() => {window.location.href = `/post/${post.slug}`}}>
+                                <div className="post-element" key={post.slug}>
                                     <div className="post-link">
-                                        <Link to={`/post/${post.slug}`}>{post.title}</Link>
+                                        <LinkWithPreload to={`/post/${post.slug}`}>{post.title}</LinkWithPreload>
                                     </div>
-                                    <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
+                                    <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}}/>
                                     <div className="comments">
                                         <CommentCount
                                             clientId='857362afdf6cb80d03d3'
@@ -99,9 +97,9 @@ class BlogHome extends Component {
                         <br />
 
                         <div>
-                            {previous_page && <Link to={`/p/${previous_page}`}>Prev</Link>}
+                            {previous_page && <LinkWithPreload to={`/p/${previous_page}`}>Prev</LinkWithPreload>}
 
-                            {next_page && <Link to={`/p/${next_page}`}>Next</Link>}
+                            {next_page && <LinkWithPreload to={`/p/${next_page}`}>Next</LinkWithPreload>}
                         </div>
                     </div>
                 </div>

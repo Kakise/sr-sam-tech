@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import LinkWithPreload from "./LinkWithPreload";
 import {ReactComponent as Github} from '../res/github.svg';
 import {ReactComponent as Twitter} from '../res/twitter.svg';
 import './Sidebar.css';
@@ -7,15 +7,14 @@ import Butter from "buttercms";
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
-
 function box(link, text) {
     return (
         <>
-            <Link to={link}>
+            <LinkWithPreload to={link}>
                 <div className="box">
                     {text}
                 </div>
-            </Link>
+            </LinkWithPreload>
         </>
     );
 }
@@ -76,20 +75,20 @@ class Sidebar extends Component {
                 <div className="sidebar">
                     <h1>Menu</h1>
                     <ul>
-                        <li>
+                        <li key={"accueil"}>
                             {box("/", "Accueil")}
                         </li>
-                        <li>
+                        <li key={"categories"}>
                             {box("/blog/categories", "Catégories")}
                         </li>
                         {links.map((link) => {
                             return (
-                                <li>
+                                <li key={link.slug}>
                                     {box("/" + link.slug, link.name)}
                                 </li>
                             );
                         })}
-                        <li>
+                        <li key={"socials"}>
                             <a href="https://twitter.com/STaaissat">
                                 <div style={{float: 'left'}} className="box">
                                     <Twitter/>

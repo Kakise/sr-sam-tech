@@ -1,12 +1,12 @@
-import React, {Component, Suspense} from 'react';
+import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import Butter from 'buttercms';
+import Header from './partial/Header';
+import Sidebar from './partial/Sidebar';
 import {Helmet} from "react-helmet";
 
 import './BlogHome.css';
 
-const Header = React.lazy(() => import('./partial/Header'));
-const Sidebar = React.lazy(() => import('./partial/Sidebar'));
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 class BlogHome extends Component {
@@ -42,10 +42,8 @@ class BlogHome extends Component {
                     <title>{page.fields.seo.title}</title>
                     <meta name="description" content={page.fields.seo.meta_description}/>
                 </Helmet>
-                <Suspense fallback={<div className="loading">Loading...</div>}>
-                    <Header/>
-                    <Sidebar/>
-                </Suspense>
+                <Header/>
+                <Sidebar/>
             </>
         )
     }

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './Header.css';
-
-const SearchBar = React.lazy(() => import('./Search'));
+import SearchBar from "./Search";
 
 class Header extends Component {
     render() {

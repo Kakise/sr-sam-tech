@@ -1,11 +1,11 @@
-import React, {Component, Suspense} from 'react';
+import React, {Component} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from 'react-helmet';
-import {Link} from "react-router-dom";
+import Header from './partial/Header';
+import Sidebar from './partial/Sidebar';
 import './Category.css';
+import LinkWithPreload from "./partial/LinkWithPreload";
 
-const Header = React.lazy(() => import('./partial/Header'))
-const Sidebar = React.lazy(() => import('./partial/Sidebar'))
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 function loadPage(name) {
@@ -14,10 +14,9 @@ function loadPage(name) {
             <Helmet>
                 <title>{`Sam's TechBlog - ${name}`}</title>
             </Helmet>
-            <Suspense fallback={<div className="loading">Loading...</div>}>
-                <Header/>
-                <Sidebar/>
-            </Suspense>
+            <Header/>
+            <Sidebar/>
+
         </>
     )
 }
@@ -84,11 +83,9 @@ class Category extends Component {
                         <div>
                             {category.recent_posts.map((post, key) => {
                                 return (
-                                    <div className="post-element" key={key} onClick={() => {
-                                        window.location.href = `/post/${post.slug}`;
-                                    }}>
+                                    <div className="post-element" key={key}>
                                         <div className="post-link">
-                                            <Link to={`/post/${post.slug}`}>{post.title}</Link>
+                                            <LinkWithPreload to={`/post/${post.slug}`}>{post.title}</LinkWithPreload>
                                         </div>
                                         <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}}/>
                                     </div>

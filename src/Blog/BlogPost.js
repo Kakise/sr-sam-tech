@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import GitalkComponent from "gitalk/dist/gitalk-component";
 import Highlight from 'react-highlight';
+import LinkWithPreload from "./partial/LinkWithPreload";
 
 import 'gitalk/dist/gitalk.css';
 import 'highlight.js/styles/solarized-light.css';
@@ -19,11 +20,11 @@ function loadPage(name, desc, featured_image) {
                 <meta name="description" content={desc}/>
                 <meta name="og:image" content={featured_image}/>
             </Helmet>
-            <Link to="/">
+            <LinkWithPreload to="/">
                 <div className="box">
                     <span>&lt;- Accueil</span>
                 </div>
-            </Link>
+            </LinkWithPreload>
         </>
     )
 }
