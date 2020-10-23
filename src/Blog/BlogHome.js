@@ -14,7 +14,7 @@ function loadPage() {
     return (
         <>
             <Helmet>
-                <title>Sam's TechBlog - Accueil</title>
+                <title>Sam's TechBlog</title>
             </Helmet>
             <Suspense fallback={<div className="loading">Loading...</div>}>
                 <Header/>

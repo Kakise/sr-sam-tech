@@ -59,7 +59,7 @@ class Categories extends Component {
             return (
                 <div className="grid">
                     <Helmet>
-                        <title>Sam's TechBlog - Catégories</title>
+                        <title>Catégories</title>
                     </Helmet>
                     <Suspense fallback={<div className="loading">Loading...</div>}>
                         <Header/>

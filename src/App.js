@@ -8,6 +8,7 @@ const Categories = React.lazy(() => import('./Blog/Categories'));
 const Category = React.lazy(() => import('./Blog/Category'));
 const SearchResults = React.lazy(() => import('./Blog/SearchResults'));
 const Footer = React.lazy(() => import('./Blog/partial/Footer'));
+const BlogPage = React.lazy(() => import('./Blog/BlogPage'));
 
 
 function App() {
@@ -18,10 +19,11 @@ function App() {
                     <Switch>
                         <Route exact path="/" component={BlogHome}/>
                         <Route path="/p/:page" component={BlogHome}/>
-                        <Route path="/results" component={SearchResults} />
-                        <Route path="/post/:slug" component={BlogPost} />
-                        <Route path="/blog/categories" component={Categories} />
-                        <Route path="/blog/category/:category" component={Category} />
+                        <Route path="/results" component={SearchResults}/>
+                        <Route path="/post/:slug" component={BlogPost}/>
+                        <Route path="/blog/categories" component={Categories}/>
+                        <Route path="/blog/category/:category" component={Category}/>
+                        <Route path="/:page" component={BlogPage}/>
                     </Switch>
                 </Router>
                 <Footer />

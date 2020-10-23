@@ -91,7 +91,6 @@ class BlogPost extends Component {
                     <h1 className="post-title">{post.title}</h1>
                     <article className="post-body">
                         <Highlight innerHTML={true}>
-                            {/*<article className="post-body" dangerouslySetInnerHTML={{__html: post.body}}/>*/}
                             {post.body}
                         </Highlight>
                     </article>
