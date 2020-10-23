@@ -54,22 +54,15 @@ class BlogHome extends Component {
             const search = this.props.location.search;
             const params = new URLSearchParams(search);
             const preview = params.get('preview');
-            let prevParam = {};
 
-            if (preview == 1) {
-                prevParam = {
-                    'preview': 1
-                };
-            }
-
-            butter.page.retrieve('*', page, prevParam).then((resp) => {
+            butter.page.retrieve('*', page, {'preview': preview}).then((resp) => {
                 resp.data["retrieved"] = Date.now(); // Store cached date
                 resp.data["cacheVersion"] = cacheVersion;
                 this.setState({
                     loaded: true,
                     resp: resp.data
                 })
-                if (preview.preview !== 1)
+                if (!preview)
                     localStorage.setItem(page, JSON.stringify(this.state.resp));
             });
         }
