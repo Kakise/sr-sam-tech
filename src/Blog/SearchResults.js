@@ -6,6 +6,7 @@ import CommentCount from "./partial/CommentCount";
 import Header from './partial/Header';
 import Sidebar from './partial/Sidebar';
 import './BlogHome.css';
+import {cacheVersion} from "../App";
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
@@ -24,32 +25,50 @@ function loadPage() {
 class SearchResults extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            query: null
-        }
+
         const search = this.props.location.search;
         const params = new URLSearchParams(search);
         const query = params.get('q');
         const cache = JSON.parse(sessionStorage.getItem("search_" + query));
 
-        if(!cache) {
-            butter.post.search(query, {page: 1, page_size: 100}).then((resp) => {
-                this.state = {
-                    resp: resp.data,
-                    query: query
-                };
-                sessionStorage.setItem("search_" + query, JSON.stringify(this.state.resp));
-            });
-        } else {
+        if (!cache) {
+            this.state = {
+                loaded: false
+            }
+        } else if (Date.now() - cache.retrieved < 86400000 && cache.cacheVersion === cacheVersion) {
             this.state = {
                 resp: cache,
                 query: query
             };
             console.log("Query loaded from cache");
+        } else {
+            this.state = {
+                loaded: false
+            }
+        }
+    }
+
+    componentDidMount() {
+        const search = this.props.location.search;
+        const params = new URLSearchParams(search);
+        const query = params.get('q');
+
+        if (!this.state.loaded) {
+            butter.post.search(query, {page: 1, page_size: 100}).then((resp) => {
+                resp.data["cacheVersion"] = cacheVersion;
+                resp.data.retrieved = Date.now();
+                this.setState({
+                    resp: resp.data,
+                    query: query,
+                    loaded: true
+                });
+                sessionStorage.setItem("search_" + query, JSON.stringify(this.state.resp));
+            });
         }
     }
 
     render() {
+        if (this.state.loaded) {
             return (
                 <div className="grid">
                     {loadPage()}
@@ -61,7 +80,7 @@ class SearchResults extends Component {
                                     <div className="post-link">
                                         <Link to={`/post/${post.slug}`}>{post.title}</Link>
                                     </div>
-                                    <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}} />
+                                    <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}}/>
                                     <div className="comments">
                                         <CommentCount
                                             clientId='857362afdf6cb80d03d3'
@@ -74,12 +93,18 @@ class SearchResults extends Component {
                             )
                         })}
                         {this.state.resp.data.length === 0 &&
-                            <h2>Aucun article ne correspond à votre recherche</h2>
+                        <h2>Aucun article ne correspond à votre recherche</h2>
                         }
                     </div>
                 </div>
             );
-
+        } else {
+            return (
+                <div className="loading">
+                    Loading...
+                </div>
+            );
+        }
     }
 }
 

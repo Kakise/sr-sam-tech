@@ -9,6 +9,7 @@ import LinkWithPreload from "./partial/LinkWithPreload";
 import 'gitalk/dist/gitalk.css';
 import 'highlight.js/styles/solarized-light.css';
 import './BlogPost.css';
+import {cacheVersion} from "../App";
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
@@ -50,7 +51,7 @@ class BlogPost extends Component {
             this.state = {
                 loaded: false
             };
-        } else if (Date.now() - cache.retrieved < 604800000) { // If cache is younger than a week
+        } else if (Date.now() - cache.retrieved < 604800000 && cache.cacheVersion === cacheVersion) { // If cache is younger than a week
             this.state = {
                 loaded: true,
                 post: cache
@@ -69,6 +70,7 @@ class BlogPost extends Component {
             // Retrieve post if not in localStorage
             butter.post.retrieve(slug).then((resp) => {
                 resp.data.data["retrieved"] = Date.now();
+                resp.data["cacheVersion"] = cacheVersion;
                 this.setState({
                     loaded: true,
                     post: resp.data.data

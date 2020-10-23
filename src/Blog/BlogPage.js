@@ -6,6 +6,7 @@ import Sidebar from './partial/Sidebar';
 import {Helmet} from "react-helmet";
 
 import './BlogHome.css';
+import {cacheVersion} from "../App";
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
@@ -20,7 +21,7 @@ class BlogHome extends Component {
             this.state = {
                 loaded: false
             };
-        } else if (Date.now() - cache.retrieved < 604800000) { // If cache is younger than a week
+        } else if (Date.now() - cache.retrieved < 604800000 && cache.cacheVersion === cacheVersion) { // If cache is younger than a week
             this.state = {
                 loaded: true,
                 resp: cache
@@ -52,6 +53,7 @@ class BlogHome extends Component {
         if (!this.state.loaded) {
             butter.page.retrieve('*', page).then((resp) => {
                 resp.data["retrieved"] = Date.now(); // Store cached date
+                resp.data["cacheVersion"] = cacheVersion;
                 this.setState({
                     loaded: true,
                     resp: resp.data

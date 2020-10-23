@@ -2,6 +2,10 @@ import React, {Suspense} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 
+const cacheVersion = '3e41a';
+
+console.log("App Version: " + cacheVersion);
+
 const ReactLazyPreload = importStatement => {
     const Component = React.lazy(importStatement);
     Component.preload = importStatement;
@@ -48,4 +52,4 @@ function App() {
     )
 }
 
-export {App as default, routes};
+export {App as default, routes, cacheVersion};

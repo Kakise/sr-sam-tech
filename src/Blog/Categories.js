@@ -5,6 +5,7 @@ import Header from './partial/Header';
 import Sidebar from './partial/Sidebar';
 import LinkWithPreload from "./partial/LinkWithPreload";
 import './Categories.css';
+import {cacheVersion} from "../App";
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
@@ -26,7 +27,7 @@ class Categories extends Component {
             this.state = {
                 loaded: false
             };
-        } else if (Date.now() - cache.retrieved < 86400000) {
+        } else if (Date.now() - cache.retrieved < 86400000 && cache.cacheVersion === cacheVersion) {
             this.state = {
                 loaded: true,
                 resp: cache,
@@ -45,6 +46,7 @@ class Categories extends Component {
         if (!this.state.loaded) {
             butter.category.list().then((resp) => {
                 resp.data.retrieved = Date.now();
+                resp.data.cacheVersion = cacheVersion;
                 this.setState({
                     loaded: true,
                     resp: resp.data,

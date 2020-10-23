@@ -4,6 +4,7 @@ import {ReactComponent as Github} from '../res/github.svg';
 import {ReactComponent as Twitter} from '../res/twitter.svg';
 import './Sidebar.css';
 import Butter from "buttercms";
+import {cacheVersion} from "../../App";
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
@@ -37,7 +38,7 @@ class Sidebar extends Component {
             this.state = {
                 loaded: false
             };
-        } else if (Date.now() - cache.retrieved < 86400000) { // If cache is younger than a day
+        } else if (Date.now() - cache.retrieved < 86400000 && cache.cacheVersion === cacheVersion) { // If cache is younger than a day
             this.state = {
                 loaded: true,
                 resp: cache
@@ -55,6 +56,7 @@ class Sidebar extends Component {
         if (!this.state.loaded) {
             butter.page.list('*').then((resp) => {
                 resp.data["retrieved"] = Date.now(); // Store cached date
+                resp.data["cacheVersion"] = cacheVersion;
                 this.setState({
                     loaded: true,
                     resp: resp.data

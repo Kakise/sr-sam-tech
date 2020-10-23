@@ -7,6 +7,7 @@ import LinkWithPreload from "./partial/LinkWithPreload";
 import Header from './partial/Header';
 import Sidebar from './partial/Sidebar';
 import './BlogHome.css';
+import {cacheVersion} from "../App";
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
@@ -33,7 +34,7 @@ class BlogHome extends Component {
             this.state = {
                 loaded: false
             };
-        } else if (Date.now() - cache.retrieved < 86400000) { // If cache is younger than a day
+        } else if (Date.now() - cache.retrieved < 86400000 && cache.cacheVersion === cacheVersion) { // If cache is younger than a day
             this.state = {
                 loaded: true,
                 resp: cache
@@ -50,6 +51,7 @@ class BlogHome extends Component {
     fetchPosts(page) {
         if (!this.state.loaded) {
             butter.post.list({page: page, page_size: 10}).then((resp) => {
+                resp.data["cacheVersion"] = cacheVersion;
                 resp.data["retrieved"] = Date.now(); // Store cached date
                 this.setState({
                     loaded: true,
@@ -109,7 +111,7 @@ class BlogHome extends Component {
                 <div className="loading">
                     Loading...
                 </div>
-            )
+            );
         }
     }
 }
