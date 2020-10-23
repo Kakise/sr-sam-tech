@@ -69,11 +69,11 @@ class BlogPost extends Component {
         if (!this.state.loaded) {
             // Retrieve post if not in localStorage
             butter.post.retrieve(slug).then((resp) => {
-                resp.data.data["retrieved"] = Date.now();
+                resp.data["retrieved"] = Date.now();
                 resp.data["cacheVersion"] = cacheVersion;
                 this.setState({
                     loaded: true,
-                    post: resp.data.data
+                    post: resp.data
                 })
                 if (this.state.post.status === "published")
                     localStorage.setItem(slug, JSON.stringify(this.state.post));
@@ -86,7 +86,7 @@ class BlogPost extends Component {
 
     render() {
         if (this.state.loaded) {
-            const post = this.state.post;
+            const post = this.state.post.data;
 
             return (
                 <div className="post">
