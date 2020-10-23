@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import Butter from 'buttercms'
+import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
 import {Link, withRouter} from 'react-router-dom';
 import GitalkComponent from "gitalk/dist/gitalk-component";
+import Highlight from 'react-highlight';
 
-import 'gitalk/dist/gitalk.css'
+import 'gitalk/dist/gitalk.css';
+import 'highlight.js/styles/solarized-light.css';
 import './BlogPost.css';
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
@@ -87,7 +89,12 @@ class BlogPost extends Component {
                 <div className="post">
                     {loadPage(post.seo_title, post.meta_description, post.featured_image)}
                     <h1 className="post-title">{post.title}</h1>
-                    <article className="post-body" dangerouslySetInnerHTML={{__html: post.body}}/>
+                    <article className="post-body">
+                        <Highlight innerHTML={true}>
+                            {/*<article className="post-body" dangerouslySetInnerHTML={{__html: post.body}}/>*/}
+                            {post.body}
+                        </Highlight>
+                    </article>
                     <br/>
                     <GitalkComponent options={{
                         clientID: '857362afdf6cb80d03d3',
