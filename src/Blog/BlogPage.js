@@ -51,7 +51,18 @@ class BlogHome extends Component {
 
     fetchPage(page) {
         if (!this.state.loaded) {
-            butter.page.retrieve('*', page).then((resp) => {
+            const search = this.props.location.search;
+            const params = new URLSearchParams(search);
+            const preview = params.get('preview');
+            let prevParam = {};
+
+            if (preview === 1) {
+                prevParam = {
+                    'preview': 1
+                };
+            }
+
+            butter.page.retrieve('*', page, prevParam).then((resp) => {
                 resp.data["retrieved"] = Date.now(); // Store cached date
                 resp.data["cacheVersion"] = cacheVersion;
                 this.setState({
