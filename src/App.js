@@ -2,7 +2,7 @@ import React, {Suspense} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 
-const cacheVersion = '3e41a';
+const cacheVersion = '3f44b';
 
 console.log("App Version: " + cacheVersion);
 

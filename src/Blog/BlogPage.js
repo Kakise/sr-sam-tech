@@ -56,7 +56,7 @@ class BlogHome extends Component {
             const preview = params.get('preview');
             let prevParam = {};
 
-            if (preview === 1) {
+            if (preview == 1) {
                 prevParam = {
                     'preview': 1
                 };
@@ -69,7 +69,8 @@ class BlogHome extends Component {
                     loaded: true,
                     resp: resp.data
                 })
-                localStorage.setItem(page, JSON.stringify(this.state.resp));
+                if (preview.preview !== 1)
+                    localStorage.setItem(page, JSON.stringify(this.state.resp));
             });
         }
     }
