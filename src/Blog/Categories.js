@@ -1,4 +1,4 @@
-import React, {Component, Suspense} from 'react';
+import React, {Component} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
 import Header from './partial/Header';
@@ -61,10 +61,8 @@ class Categories extends Component {
                     <Helmet>
                         <title>Catégories</title>
                     </Helmet>
-                    <Suspense fallback={<div className="loading">Loading...</div>}>
-                        <Header/>
-                        <Sidebar/>
-                    </Suspense>
+                    <Header/>
+                    <Sidebar/>
                     <div className="categories">
                         <h1>Liste des catégories</h1>
                         {this.state.resp.data.map((category, key) => {
