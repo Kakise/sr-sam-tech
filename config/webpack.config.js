@@ -660,7 +660,7 @@ module.exports = function (webpackEnv) {
       }),
       new FontPreloadPlugin({
         indexFile: 'index.html',
-        extensions: ['woff', 'ttf', 'eot', 'woff2'],
+        extensions: ['woff', 'ttf', 'woff2'],
       }),
       new AsyncCssPlugin({ /* options */}),
     ].filter(Boolean),
