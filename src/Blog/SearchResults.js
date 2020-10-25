@@ -1,14 +1,11 @@
-import React, {Component} from 'react';
-import Butter from 'buttercms'
+import React, {Component} from "react";
 import {Helmet} from "react-helmet";
 import {Link} from "react-router-dom";
 import CommentCount from "./partial/CommentCount";
-import Header from './partial/Header';
-import Sidebar from './partial/Sidebar';
-import './BlogHome.css';
-import {cacheVersion} from "../App";
-
-const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
+import Header from "./partial/Header";
+import Sidebar from "./partial/Sidebar";
+import {butter, cacheVersion} from "../App";
+import "./BlogHome.css";
 
 function loadPage() {
     return (

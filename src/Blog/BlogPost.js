@@ -44,7 +44,10 @@ class BlogPost extends Component {
         super(props);
 
         const slug = this.props.match.params.slug;
+        console.log(this.props.match.params.slug)
         const cache = JSON.parse(localStorage.getItem(slug));
+
+        this.comments = React.createRef();
 
         // Idk how to code lmao
         if (!cache) {
@@ -63,8 +66,18 @@ class BlogPost extends Component {
         }
     }
 
+    handleScrollToElement(event) {
+
+    }
+
     async componentDidMount() {
         const slug = this.props.match.params.slug;
+        const params = new URLSearchParams(this.props.location.search);
+        const query = params.get('com');
+
+        if (query === "1") {
+            window.scrollTo(0, this.comments.current.offsetTop);
+        }
 
         if (!this.state.loaded) {
             // Retrieve post if not in localStorage
@@ -98,17 +111,19 @@ class BlogPost extends Component {
                         </Highlight>
                     </article>
                     <br/>
-                    <GitalkComponent options={{
-                        clientID: '857362afdf6cb80d03d3',
-                        clientSecret: 'eebbfa120cbea84c449100e592a48fe1dd521b23',
-                        repo: 'gitalk',      // The repository of store comments,
-                        owner: 'Kakise',
-                        admin: ['Kakise'],
-                        id: post.url.slice(0, 49),      // Ensure uniqueness and length less than 50
-                        title: post.title,
-                        language: 'fr',
-                        distractionFreeMode: false  // Facebook-like distraction free mode
-                    }}/>
+                    <div ref={this.comments}>
+                        <GitalkComponent options={{
+                            clientID: '857362afdf6cb80d03d3',
+                            clientSecret: 'eebbfa120cbea84c449100e592a48fe1dd521b23',
+                            repo: 'gitalk',      // The repository of store comments,
+                            owner: 'Kakise',
+                            admin: ['Kakise'],
+                            id: post.url.slice(0, 49),      // Ensure uniqueness and length less than 50
+                            title: post.title,
+                            language: 'fr',
+                            distractionFreeMode: false  // Facebook-like distraction free mode
+                        }}/>
+                    </div>
                 </div>
             );
         } else {

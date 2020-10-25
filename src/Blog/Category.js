@@ -1,13 +1,10 @@
-import React, {Component} from 'react';
-import Butter from 'buttercms';
-import {Helmet} from 'react-helmet';
-import Header from './partial/Header';
-import Sidebar from './partial/Sidebar';
-import './Category.css';
+import React, {Component} from "react";
+import {Helmet} from "react-helmet";
+import Header from "./partial/Header";
+import Sidebar from "./partial/Sidebar";
 import LinkWithPreload from "./partial/LinkWithPreload";
-import {cacheVersion} from "../App";
-
-const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
+import {butter, cacheVersion} from "../App";
+import "./Category.css";
 
 function loadPage(name) {
     return (

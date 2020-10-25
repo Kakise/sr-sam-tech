@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import './Header.css';
+import React, {Component} from "react";
 import SearchBar from "./Search";
+import "./Header.css";
 
 class Header extends Component {
     render() {

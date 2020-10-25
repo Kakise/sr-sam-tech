@@ -1,15 +1,13 @@
-import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
-import Butter from 'buttercms';
+import React, {Component} from "react";
+import {withRouter} from "react-router-dom";
 import {Helmet} from "react-helmet";
 import CommentCount from "./partial/CommentCount";
 import LinkWithPreload from "./partial/LinkWithPreload";
-import Header from './partial/Header';
-import Sidebar from './partial/Sidebar';
-import './BlogHome.css';
-import {cacheVersion} from "../App";
+import Header from "./partial/Header";
+import Sidebar from "./partial/Sidebar";
+import "./BlogHome.css";
+import {butter, cacheVersion} from "../App";
 
-const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 function loadPage() {
     return (
@@ -90,7 +88,8 @@ class BlogHome extends Component {
                                             clientSecret='eebbfa120cbea84c449100e592a48fe1dd521b23'
                                             owner="Kakise"
                                             repo="gitalk"
-                                            title={post.title}/>
+                                            title={post.title}
+                                            slug={post.slug}/>
                                     </div>
                                 </div>
                             )

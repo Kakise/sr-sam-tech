@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, {Component} from 'react';
+import LinkWithPreload from "./LinkWithPreload";
 
 class CommentCount extends Component {
     constructor(props) {
@@ -62,11 +63,13 @@ class CommentCount extends Component {
                 text = "Aucun Commentaire"
             }
             return (
-                <div className="comment-count">{text}</div>
+                <LinkWithPreload to={"/post/" + this.props.slug + "?com=1"}
+                                 className="comment-count">{text}</LinkWithPreload>
             );
         } else {
             return (
-                <div className="comment-count">Chargement...</div>
+                <LinkWithPreload to={"/post/" + this.props.slug}
+                                 className="comment-count">Chargement...</LinkWithPreload>
             );
         }
     }

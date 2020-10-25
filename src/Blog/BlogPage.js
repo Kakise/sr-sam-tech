@@ -1,14 +1,11 @@
-import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
-import Butter from 'buttercms';
-import Header from './partial/Header';
-import Sidebar from './partial/Sidebar';
+import React, {Component} from "react";
+import {withRouter} from "react-router-dom";
+import Header from "./partial/Header";
+import Sidebar from "./partial/Sidebar";
 import {Helmet} from "react-helmet";
+import {butter, cacheVersion} from "../App";
+import "./BlogHome.css";
 
-import './BlogHome.css';
-import {cacheVersion} from "../App";
-
-const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 class BlogHome extends Component {
     constructor(props) {

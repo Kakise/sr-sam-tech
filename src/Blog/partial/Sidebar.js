@@ -1,12 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import LinkWithPreload from "./LinkWithPreload";
-import {ReactComponent as Github} from '../res/github.svg';
-import {ReactComponent as Twitter} from '../res/twitter.svg';
-import './Sidebar.css';
-import Butter from "buttercms";
-import {cacheVersion} from "../../App";
-
-const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
+import {ReactComponent as Github} from "../res/github.svg";
+import {ReactComponent as Twitter} from "../res/twitter.svg";
+import {butter, cacheVersion} from "../../App";
+import "./Sidebar.css";
 
 function box(link, text) {
     return (

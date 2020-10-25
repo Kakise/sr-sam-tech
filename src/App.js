@@ -1,8 +1,10 @@
-import React, {Suspense} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import './App.css';
+import React, {Suspense} from "react";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Butter from "buttercms";
+import "./App.css";
 
-const cacheVersion = '3f44c';
+const cacheVersion = '4a00a';
+const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 console.log("App Version: " + cacheVersion);
 
@@ -52,4 +54,4 @@ function App() {
     )
 }
 
-export {App as default, routes, cacheVersion};
+export {App as default, routes, cacheVersion, butter};
