@@ -58,6 +58,15 @@ class BlogPost extends Component {
         }
     }
 
+    scrollToComs() {
+        const params = new URLSearchParams(this.props.location.search);
+        const query = params.get('com');
+
+        if (query === "1") {
+            this.comments.current.scrollIntoView();
+        }
+    }
+
     async componentDidMount() {
         const slug = this.props.match.params.slug;
 
@@ -76,18 +85,17 @@ class BlogPost extends Component {
         } else {
             console.log("Post loaded from cache");
             console.log("Post is " + (Date.now() - this.state.post.retrieved).toString() + " ms old");
+            this.scrollToComs();
         }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.scrollToComs();
     }
 
     render() {
         if (this.state.loaded) {
             const post = this.state.post.data;
-            const params = new URLSearchParams(this.props.location.search);
-            const query = params.get('com');
-
-            if (query === "1") {
-                this.comments.current.scrollIntoView();
-            }
 
             return (
                 <div className="post">
