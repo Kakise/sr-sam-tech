@@ -53,7 +53,6 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 // font preloading plugin
 const FontPreloadPlugin = require('webpack-font-preload-plugin');
 const AsyncCssPlugin = require("async-css-plugin");
-const CriticalCssPlugin = require('critical-css-webpack-plugin');
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -655,9 +654,6 @@ module.exports = function (webpackEnv) {
         formatter: isEnvProduction ? typescriptFormatter : undefined,
       }),
       // Preload the fonts
-      new CriticalCssPlugin({
-        base: 'build',
-      }),
       new FontPreloadPlugin({
         indexFile: 'index.html',
         extensions: ['woff', 'ttf', 'woff2'],
