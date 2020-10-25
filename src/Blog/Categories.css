@@ -9,6 +9,12 @@
     grid-area: 2 / 2 / 3 / 7;
 }
 
+@media (max-width: 600px) {
+    .categories {
+        grid-area: 2 / 1 / 3 / 7;
+    }
+}
+
 .box {
     border: solid 4px rgba(0, 0, 0, .6);
     padding: 7px;
