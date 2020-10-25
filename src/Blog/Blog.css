@@ -5,6 +5,10 @@
     grid-row-gap: 0;
 }
 
+.blogHome {
+    grid-area: 2 / 2 / 3 / 7;
+    padding-bottom: 20px;
+}
 
 @media (max-width: 600px) {
     .blogHome {

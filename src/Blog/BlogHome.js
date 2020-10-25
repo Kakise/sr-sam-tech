@@ -5,7 +5,7 @@ import CommentCount from "./partial/CommentCount";
 import LinkWithPreload from "./partial/LinkWithPreload";
 import Header from "./partial/Header";
 import Sidebar from "./partial/Sidebar";
-import "./BlogHome.css";
+import "./Blog.css";
 import {butter, cacheVersion} from "../App";
 
 

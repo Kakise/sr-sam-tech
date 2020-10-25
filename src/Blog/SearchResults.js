@@ -5,7 +5,7 @@ import CommentCount from "./partial/CommentCount";
 import Header from "./partial/Header";
 import Sidebar from "./partial/Sidebar";
 import {butter, cacheVersion} from "../App";
-import "./BlogHome.css";
+import "./Blog.css";
 
 function loadPage() {
     return (

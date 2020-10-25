@@ -4,7 +4,7 @@ import Header from "./partial/Header";
 import Sidebar from "./partial/Sidebar";
 import {Helmet} from "react-helmet";
 import {butter, cacheVersion} from "../App";
-import "./BlogHome.css";
+import "./Blog.css";
 
 
 class BlogHome extends Component {
