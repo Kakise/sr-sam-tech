@@ -60,12 +60,6 @@ class BlogPost extends Component {
 
     async componentDidMount() {
         const slug = this.props.match.params.slug;
-        const params = new URLSearchParams(this.props.location.search);
-        const query = params.get('com');
-
-        if (query === "1") {
-            this.comments.current.scrollIntoView();
-        }
 
         if (!this.state.loaded) {
             // Retrieve post if not in localStorage
@@ -88,6 +82,12 @@ class BlogPost extends Component {
     render() {
         if (this.state.loaded) {
             const post = this.state.post.data;
+            const params = new URLSearchParams(this.props.location.search);
+            const query = params.get('com');
+
+            if (query === "1") {
+                this.comments.current.scrollIntoView();
+            }
 
             return (
                 <div className="post">
