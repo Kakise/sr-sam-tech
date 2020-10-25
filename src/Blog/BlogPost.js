@@ -30,14 +30,6 @@ function loadPage(name, desc, featured_image) {
     )
 }
 
-function loadingDiv() {
-    return (
-        <div className="loading">
-            Loading...
-        </div>
-    );
-}
-
 class BlogPost extends Component {
 
     constructor(props) {
@@ -66,17 +58,13 @@ class BlogPost extends Component {
         }
     }
 
-    handleScrollToElement(event) {
-
-    }
-
     async componentDidMount() {
         const slug = this.props.match.params.slug;
         const params = new URLSearchParams(this.props.location.search);
         const query = params.get('com');
 
         if (query === "1") {
-            window.scrollTo(0, this.comments.current.offsetTop);
+            this.comments.current.scrollIntoView();
         }
 
         if (!this.state.loaded) {
@@ -127,7 +115,11 @@ class BlogPost extends Component {
                 </div>
             );
         } else {
-            return loadingDiv();
+            return (
+                <div ref={this.comments} className="loading">
+                    Loading...
+                </div>
+            );
         }
     }
 }
