@@ -98,9 +98,12 @@ class BlogHome extends Component {
                         <br />
 
                         <div>
-                            {previous_page && <LinkWithPreload to={`/p/${previous_page}`}>Prev</LinkWithPreload>}
+                            {previous_page && <div style={{float: 'left'}} className="box"><LinkWithPreload
+                                to={`/p/${previous_page}`}>Prev</LinkWithPreload></div>}
 
-                            {next_page && <LinkWithPreload to={`/p/${next_page}`}>Next</LinkWithPreload>}
+                            {next_page &&
+                            <div style={{float: 'left', margin: '0 0 0 7px'}} className="box"><LinkWithPreload
+                                to={`/p/${next_page}`}>Next</LinkWithPreload></div>}
                         </div>
                     </div>
                 </div>

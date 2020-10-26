@@ -19,9 +19,10 @@ const preloadRouteComponent = (path) => {
     }
 };
 
-const LinkWithPreload = ({to, onPreload, ...rest}) => {
+const LinkWithPreload = ({className, to, onPreload, ...rest}) => {
     return (
         <Link
+            className={className}
             to={to}
             onMouseEnter={() => preloadRouteComponent(to)}
             {...rest}
