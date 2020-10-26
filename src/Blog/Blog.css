@@ -43,6 +43,12 @@
     font-family: 'Times New Roman', serif;
 }
 
+.post-date {
+    font-family: 'Times New Roman', serif;
+    display: flex;
+    margin: 7px 0 7px 0;
+}
+
 .comments {
     text-align: right;
 }

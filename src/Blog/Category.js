@@ -3,7 +3,10 @@ import {Helmet} from "react-helmet";
 import Header from "./partial/Header";
 import Sidebar from "./partial/Sidebar";
 import LinkWithPreload from "./partial/LinkWithPreload";
+import CommentCount from "./partial/CommentCount";
 import {butter, cacheVersion} from "../App";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
 import "./Category.css";
 
 function loadPage(name) {
@@ -81,12 +84,25 @@ class Category extends Component {
                         <h1>{category.name}</h1>
                         <div>
                             {category.recent_posts.map((post, key) => {
+                                const d = new Date(Date.parse(post.updated));
                                 return (
                                     <div className="post-element" key={key}>
                                         <div className="post-link">
                                             <LinkWithPreload to={`/post/${post.slug}`}>{post.title}</LinkWithPreload>
                                         </div>
+                                        <p className="post-date">
+                                            <FontAwesomeIcon
+                                                icon={faCalendarAlt}/>&nbsp;&nbsp;{d.toLocaleString('fr-FR')}
+                                        </p>
                                         <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}}/>
+                                        <div className="comments">
+                                            <CommentCount
+                                                clientId='857362afdf6cb80d03d3'
+                                                clientSecret='eebbfa120cbea84c449100e592a48fe1dd521b23'
+                                                owner="Kakise"
+                                                repo="gitalk"
+                                                title={post.title}/>
+                                        </div>
                                     </div>
                                 )
                             })}

@@ -5,8 +5,10 @@ import CommentCount from "./partial/CommentCount";
 import LinkWithPreload from "./partial/LinkWithPreload";
 import Header from "./partial/Header";
 import Sidebar from "./partial/Sidebar";
-import "./Blog.css";
 import {butter, cacheVersion} from "../App";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
+import "./Blog.css";
 
 
 function loadPage() {
@@ -76,11 +78,15 @@ class BlogHome extends Component {
                     <div className="blogHome">
                         <h1>Articles</h1>
                         {this.state.resp.data.map((post) => {
+                            const d = new Date(Date.parse(post.updated));
                             return (
                                 <div className="post-element" key={post.slug}>
                                     <div className="post-link">
                                         <LinkWithPreload to={`/post/${post.slug}`}>{post.title}</LinkWithPreload>
                                     </div>
+                                    <p className="post-date">
+                                        <FontAwesomeIcon icon={faCalendarAlt}/>&nbsp;&nbsp;{d.toLocaleString('fr-FR')}
+                                    </p>
                                     <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}}/>
                                     <div className="comments">
                                         <CommentCount

@@ -5,6 +5,8 @@ import CommentCount from "./partial/CommentCount";
 import Header from "./partial/Header";
 import Sidebar from "./partial/Sidebar";
 import {butter, cacheVersion} from "../App";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
 import "./Blog.css";
 
 function loadPage() {
@@ -72,11 +74,15 @@ class SearchResults extends Component {
                     <div className="blogHome">
                         <h1>Résultats correspondants à : "{this.state.query}"</h1>
                         {this.state.resp.data.map((post) => {
+                            const d = new Date(Date.parse(post.updated));
                             return (
                                 <div className="post-element" key={post.slug}>
                                     <div className="post-link">
                                         <Link to={`/post/${post.slug}`}>{post.title}</Link>
                                     </div>
+                                    <p className="post-date">
+                                        <FontAwesomeIcon icon={faCalendarAlt}/>&nbsp;&nbsp;{d.toLocaleString('fr-FR')}
+                                    </p>
                                     <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}}/>
                                     <div className="comments">
                                         <CommentCount
