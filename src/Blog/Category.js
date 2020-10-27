@@ -101,7 +101,8 @@ class Category extends Component {
                                                 clientSecret='eebbfa120cbea84c449100e592a48fe1dd521b23'
                                                 owner="Kakise"
                                                 repo="gitalk"
-                                                title={post.title}/>
+                                                title={post.title}
+                                                slug={post.slug}/>
                                         </div>
                                     </div>
                                 )
