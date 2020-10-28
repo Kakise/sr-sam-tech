@@ -62,6 +62,8 @@ class SearchResults extends Component {
                     loaded: true
                 });
                 sessionStorage.setItem("search_" + query, JSON.stringify(this.state.resp));
+            }).catch(function(resp) {
+                window.location.href = "/404";
             });
         }
     }

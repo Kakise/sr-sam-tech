@@ -81,6 +81,8 @@ class BlogPost extends Component {
                 })
                 if (this.state.post.data.status === "published")
                     localStorage.setItem(slug, JSON.stringify(this.state.post));
+            }).catch(function(resp) {
+                window.location.href = "/404";
             });
         } else {
             console.log("Post loaded from cache");

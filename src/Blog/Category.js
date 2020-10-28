@@ -69,6 +69,8 @@ class Category extends Component {
                     resp: resp.data,
                 });
                 localStorage.setItem("category_" + match.params.category, JSON.stringify(resp.data));
+            }).catch(function(resp) {
+                window.location.href = "/404";
             });
         }
     }

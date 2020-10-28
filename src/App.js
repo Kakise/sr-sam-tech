@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Butter from "buttercms";
 import "./App.css";
 
-const cacheVersion = '4a01c';
+const cacheVersion = '4a11c';
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
 console.log("App Version: " + cacheVersion);
@@ -20,6 +20,7 @@ const Categories = ReactLazyPreload(() => import('./Blog/Categories'));
 const Category = ReactLazyPreload(() => import('./Blog/Category'));
 const SearchResults = ReactLazyPreload(() => import('./Blog/SearchResults'));
 const Footer = React.lazy(() => import('./Blog/partial/Footer'));
+const NotFoundPage = React.lazy(() => import('./Blog/404'));
 const BlogPage = ReactLazyPreload(() => import('./Blog/BlogPage'));
 
 const routes = [
@@ -29,6 +30,7 @@ const routes = [
     {path: "/post/:slug", exact: true, component: BlogPost},
     {path: "/blog/categories", exact: true, component: Categories},
     {path: "/blog/category/:category", exact: true, component: Category},
+    {path: "/404", exact: true, component: NotFoundPage},
     {path: "/:page", exact: true, component: BlogPage}
 ];
 
