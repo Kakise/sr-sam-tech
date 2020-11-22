@@ -34,9 +34,10 @@ img {
     padding: 7px;
     display: inline-block;
     border-radius: 5px;
-    margin: 1em;
+    margin: 0.5em;
     font-size: small;
     color: rgba(39, 39, 39, 1);
+    box-shadow: 4px 4px rgba(0, 0, 150, .1);
 }
 
 .box {
@@ -49,6 +50,15 @@ img {
     width: fit-content;
     transition: box-shadow 1s, left 1s, top 1s;
     font-family: 'Marmelad', sans-serif;
+}
+
+.box:hover {
+    border: solid 4px rgba(0, 0, 0, .6);
+    padding: 7px;
+    box-shadow: 8px 8px rgba(0, 0, 150, .1);
+    top: -5px;
+    left: -5px;
+    width: fit-content;
 }
 
 code {

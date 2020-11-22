@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import Butter from 'buttercms';
 import {Helmet} from "react-helmet";
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import GitalkComponent from "gitalk/dist/gitalk-component";
 import Highlight from 'react-highlight';
-import LinkWithPreload from "./partial/LinkWithPreload";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTag} from "@fortawesome/free-solid-svg-icons";
 import 'gitalk/dist/gitalk.css';
@@ -23,11 +22,11 @@ function loadPage(name, desc, featured_image) {
                 <meta name="description" content={desc}/>
                 <meta name="og:image" content={featured_image}/>
             </Helmet>
-            <LinkWithPreload to="/">
+            <Link to="/">
                 <div className="box">
                     <span>&lt;- Accueil</span>
                 </div>
-            </LinkWithPreload>
+            </Link>
         </>
     )
 }
@@ -103,7 +102,6 @@ class BlogPost extends Component {
                 <div className="post">
                     {loadPage(post.seo_title, post.meta_description, post.featured_image)}
                     <div className="post-header">
-                        <h1 className="post-title">{post.title}</h1>
                         <div className="post-tags">
                             <ul>
                                 {post.tags.map((tag, key) => {
@@ -114,6 +112,7 @@ class BlogPost extends Component {
                                 })}
                             </ul>
                         </div>
+                        <h1 className="post-title">{post.title}</h1>
                     </div>
                     <article className="post-body">
                         <Highlight innerHTML={true}>
