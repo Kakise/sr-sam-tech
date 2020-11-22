@@ -58,6 +58,8 @@ class BlogHome extends Component {
                     resp: resp.data
                 })
                 localStorage.setItem("home_" + page, JSON.stringify(this.state.resp));
+            }).catch(function(resp) {
+                window.location.href = "/404";
             });
         }
     }

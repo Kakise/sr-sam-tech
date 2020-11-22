@@ -7,7 +7,7 @@ import {butter, cacheVersion} from "../App";
 import "./Blog.css";
 
 
-class BlogHome extends Component {
+class BlogPage extends Component {
     constructor(props) {
         super(props);
 
@@ -61,6 +61,8 @@ class BlogHome extends Component {
                 })
                 if (!preview)
                     localStorage.setItem(page, JSON.stringify(this.state.resp));
+            }).catch(function(resp) {
+                window.location.href = "/404";
             });
         }
     }
@@ -91,4 +93,4 @@ class BlogHome extends Component {
     }
 }
 
-export default withRouter(BlogHome);
+export default withRouter(BlogPage);

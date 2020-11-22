@@ -69,6 +69,8 @@ class Category extends Component {
                     resp: resp.data,
                 });
                 localStorage.setItem("category_" + match.params.category, JSON.stringify(resp.data));
+            }).catch(function(resp) {
+                window.location.href = "/404";
             });
         }
     }
@@ -101,7 +103,8 @@ class Category extends Component {
                                                 clientSecret='eebbfa120cbea84c449100e592a48fe1dd521b23'
                                                 owner="Kakise"
                                                 repo="gitalk"
-                                                title={post.title}/>
+                                                title={post.title}
+                                                slug={post.slug}/>
                                         </div>
                                     </div>
                                 )
