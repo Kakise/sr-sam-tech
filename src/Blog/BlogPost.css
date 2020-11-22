@@ -5,9 +5,9 @@
 }
 
 img {
-        max-width: 100%;
-        max-height: 100%;
-        display: block;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
 }
 
 @media (max-width: 600px) {
@@ -22,6 +22,21 @@ img {
 
 .post-body {
     font-family: 'Times New Roman', serif;
+}
+
+.post-tags {
+    margin-top: 2px;
+}
+
+.post-tag {
+    background: rgba(187, 187, 187, 0.6);
+    list-style-type: none;
+    padding: 7px;
+    display: inline-block;
+    border-radius: 5px;
+    margin: 1em;
+    font-size: small;
+    color: rgba(39, 39, 39, 1);
 }
 
 .box {

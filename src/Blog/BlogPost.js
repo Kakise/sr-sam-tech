@@ -5,11 +5,13 @@ import {withRouter} from 'react-router-dom';
 import GitalkComponent from "gitalk/dist/gitalk-component";
 import Highlight from 'react-highlight';
 import LinkWithPreload from "./partial/LinkWithPreload";
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTag} from "@fortawesome/free-solid-svg-icons";
 import 'gitalk/dist/gitalk.css';
 import 'highlight.js/styles/solarized-light.css';
 import './BlogPost.css';
 import {cacheVersion} from "../App";
+
 
 const butter = Butter('1f984113d19d94aeba9f2a731197b9993b18a369');
 
@@ -100,7 +102,19 @@ class BlogPost extends Component {
             return (
                 <div className="post">
                     {loadPage(post.seo_title, post.meta_description, post.featured_image)}
-                    <h1 className="post-title">{post.title}</h1>
+                    <div className="post-header">
+                        <h1 className="post-title">{post.title}</h1>
+                        <div className="post-tags">
+                            <ul>
+                                {post.tags.map((tag, key) => {
+                                    return (
+                                        <li className="post-tag" key={key}><FontAwesomeIcon
+                                            icon={faTag}/>&nbsp;&nbsp;{tag.name}</li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
+                    </div>
                     <article className="post-body">
                         <Highlight innerHTML={true}>
                             {post.body}
