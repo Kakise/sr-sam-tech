@@ -139,7 +139,7 @@ class BlogPost extends Component {
             );
         } else {
             return (
-                <div ref={this.comments} className="loading">
+                <div ref={this.comments}>
                     Loading...
                 </div>
             );

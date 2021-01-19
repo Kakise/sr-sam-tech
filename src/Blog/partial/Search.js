@@ -6,8 +6,8 @@ class SearchBar extends Component {
         return (
             <div className="search-bar">
                 <form method="get" action="/results" role="search">
-                    <input className="search" id="search" type="search" name="q" placeholder="Rechercher..." autoFocus required/>
-                    {/*<button class="search-btn" type="submit">Go</button>-->*/}
+                    <input className="search" id="search" type="search" name="q" placeholder="Rechercher..." required/>
+                    <label htmlFor="search" style={{display: 'none'}}>Entrez votre recherche</label>
                 </form>
             </div>
 
