@@ -55,13 +55,6 @@ class BlogHome extends Component {
         this.fetchPosts(page)
     }
 
-    componentWillUnmount() {
-        this.setState({
-            loaded: false,
-            resp: undefined
-        });
-    }
-
     render() {
         if (this.state.loaded) {
             const {next_page, previous_page} = this.state.resp.meta;
