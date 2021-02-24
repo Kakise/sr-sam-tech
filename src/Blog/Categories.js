@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import {Helmet} from "react-helmet";
-import Header from "./partial/Header";
-import Sidebar from "./partial/Sidebar";
 import LinkWithPreload from "./partial/LinkWithPreload";
 import "./Categories.css";
 import {butter, cacheVersion} from "../App";
@@ -58,25 +56,21 @@ class Categories extends Component {
     render() {
         if (this.state.loaded) {
             return (
-                <div className="grid">
+                <div className="categories">
                     <Helmet>
                         <title>Catégories</title>
                     </Helmet>
-                    <Header/>
-                    <Sidebar/>
-                    <div className="categories">
-                        <h1>Liste des catégories</h1>
-                        {this.state.resp.data.map((category, key) => {
-                            return (
-                                <LinkWithPreload to={`/blog/category/${category.slug}`} key={key}>
-                                    <div className="box">
-                                        <span>{category.name}</span>
-                                    </div>
-                                </LinkWithPreload>
-                            )
-                        })}
+                    <h1>Liste des catégories</h1>
+                    {this.state.resp.data.map((category, key) => {
+                        return (
+                            <LinkWithPreload to={`/blog/category/${category.slug}`} key={key}>
+                                <div className="box">
+                                    <span>{category.name}</span>
+                                </div>
+                            </LinkWithPreload>
+                        )
+                    })}
                     </div>
-                </div>
             )
         } else {
             return loadingDiv();

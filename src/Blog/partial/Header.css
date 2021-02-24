@@ -1,3 +1,4 @@
 .header {
     grid-area: 1 / 1 / 2 / 7;
+    height: 20%;
 }

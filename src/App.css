@@ -10,6 +10,9 @@ main {
   padding: 20px;
   position: relative;
   min-height: 90vh;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 20% 79% 1%;
 }
 
 .loading {
@@ -20,4 +23,53 @@ main {
   font-size: xx-large;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+.grid {
+
+}
+
+.post-element {
+  border: solid 4px rgba(0, 0, 0, .6);
+  padding: 15px;
+  box-shadow: 3px 3px rgba(0, 0, 150, .1);
+  position: relative;
+  top: 0;
+  left: 0;
+  transition: box-shadow 1s, left 1s, top 1s;
+  margin-top: 7px;
+}
+
+.post-element:hover {
+  border: solid 4px rgba(0, 0, 0, .6);
+  padding: 15px;
+  box-shadow: 8px 8px rgba(0, 0, 150, .1);
+  top: -5px;
+  left: -5px;
+}
+
+.post-link {
+  font-family: 'Marmelad', sans-serif;
+}
+
+.post-excerpt, .comments {
+  font-family: 'Times New Roman', serif;
+}
+
+.post-date {
+  font-family: 'Times New Roman', serif;
+  display: flex;
+  margin: 7px 0 7px 0;
+}
+
+.box {
+  border: solid 4px rgba(0, 0, 0, .6);
+  padding: 7px;
+  box-shadow: 3px 3px rgba(0, 0, 150, .1);
+  position: relative;
+  top: 0;
+  left: 0;
+  width: fit-content;
+  transition: box-shadow 1s, left 1s, top 1s;
+  font-family: 'Marmelad', sans-serif;
 }

@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import {withRouter} from "react-router-dom";
-import Header from "./partial/Header";
-import Sidebar from "./partial/Sidebar";
 import {Helmet} from "react-helmet";
 import {butter, cacheVersion} from "../App";
 import "./Blog.css";
@@ -44,8 +42,7 @@ class BlogPage extends Component {
                     <title>{page.fields.seo.title}</title>
                     <meta name="description" content={page.fields.seo.meta_description}/>
                 </Helmet>
-                <Header/>
-                <Sidebar/>
+
             </>
         )
     }
@@ -90,11 +87,11 @@ class BlogPage extends Component {
         if (this.state.loaded) {
             const page = this.state.resp.data;
             return (
-                <div className="grid">
+                <>
                     {this.loadPage()}
                     <div className="blogHome" dangerouslySetInnerHTML={{__html: page.fields.body}}>
                     </div>
-                </div>
+                </>
             );
         } else {
             return (

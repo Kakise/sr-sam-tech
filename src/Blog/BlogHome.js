@@ -3,25 +3,10 @@ import {withRouter} from "react-router-dom";
 import {Helmet} from "react-helmet";
 import CommentCount from "./partial/CommentCount";
 import LinkWithPreload from "./partial/LinkWithPreload";
-import Header from "./partial/Header";
-import Sidebar from "./partial/Sidebar";
 import {butter, cacheVersion} from "../App";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCalendarAlt} from "@fortawesome/free-regular-svg-icons";
 import "./Blog.css";
-
-
-function loadPage() {
-    return (
-        <>
-            <Helmet>
-                <title>Sam's TechBlog</title>
-            </Helmet>
-            <Header/>
-            <Sidebar/>
-        </>
-    )
-}
 
 class BlogHome extends Component {
     constructor(props) {
@@ -70,24 +55,32 @@ class BlogHome extends Component {
         this.fetchPosts(page)
     }
 
+    componentWillUnmount() {
+        this.setState({
+            loaded: false,
+            resp: undefined
+        });
+    }
+
     render() {
         if (this.state.loaded) {
-            const { next_page, previous_page } = this.state.resp.meta;
+            const {next_page, previous_page} = this.state.resp.meta;
 
             return (
-                <div className="grid">
-                    {loadPage()}
-                    <div className="blogHome">
-                        <h1>Articles</h1>
-                        {this.state.resp.data.map((post) => {
-                            const d = new Date(Date.parse(post.updated));
-                            return (
-                                <div className="post-element" key={post.slug}>
-                                    <div className="post-link">
-                                        <LinkWithPreload to={`/post/${post.slug}`}>{post.title}</LinkWithPreload>
-                                    </div>
-                                    <p className="post-date">
-                                        <FontAwesomeIcon icon={faCalendarAlt}/>&nbsp;&nbsp;{d.toLocaleString('fr-FR')}
+                <div className="blogHome">
+                    <Helmet>
+                        <title>Sam's TechBlog</title>
+                    </Helmet>
+                    <h1>Articles</h1>
+                    {this.state.resp.data.map((post) => {
+                        const d = new Date(Date.parse(post.updated));
+                        return (
+                            <div className="post-element" key={post.slug}>
+                                <div className="post-link">
+                                    <LinkWithPreload to={`/post/${post.slug}`}>{post.title}</LinkWithPreload>
+                                </div>
+                                <p className="post-date">
+                                    <FontAwesomeIcon icon={faCalendarAlt}/>&nbsp;&nbsp;{d.toLocaleString('fr-FR')}
                                     </p>
                                     <div className="post-excerpt" dangerouslySetInnerHTML={{__html: post.summary}}/>
                                     <div className="comments">
@@ -114,7 +107,6 @@ class BlogHome extends Component {
                                 to={`/p/${next_page}`}>Next</LinkWithPreload></div>}
                         </div>
                     </div>
-                </div>
             );
         } else {
             return (

@@ -1,18 +1,18 @@
 import React, {Component} from "react";
 import {ReactComponent as Github} from "../res/github.svg";
 import {ReactComponent as Twitter} from "../res/twitter.svg";
-import LinkWithPreload from "./LinkWithPreload";
 import {butter, cacheVersion} from "../../App";
 import "./Sidebar.css";
+import {Link} from "react-router-dom";
 
 function box(link, text) {
     return (
         <>
-            <LinkWithPreload to={link}>
+            <Link to={link}>
                 <div className="box">
                     {text}
                 </div>
-            </LinkWithPreload>
+            </Link>
         </>
     );
 }
@@ -33,24 +33,24 @@ class Sidebar extends Component {
 
         if (!cache) {
             this.state = {
-                loaded: false
+                sideBarLoaded: false
             };
         } else if (Date.now() - cache.retrieved < 86400000 && cache.cacheVersion === cacheVersion) { // If cache is younger than a day
             this.state = {
-                loaded: true,
-                resp: cache
+                sideBarLoaded: true,
+                SBResp: cache
             };
             console.log("Page loaded from cache");
-            console.log("Page is " + (Date.now() - this.state.resp.retrieved).toString() + " ms old");
+            console.log("Page is " + (Date.now() - this.state.SBResp.retrieved).toString() + " ms old");
         } else {
             this.state = {
-                loaded: false
+                sideBarLoaded: false
             };
         }
     }
 
     fetchPages() {
-        if (!this.state.loaded) {
+        if (!this.state.sideBarLoaded) {
             butter.page.list('default').then((resp) => {
                 resp.data["retrieved"] = Date.now(); // Store cached date
                 resp.data["cacheVersion"] = cacheVersion;
@@ -62,10 +62,10 @@ class Sidebar extends Component {
                 }
                 resp.data.data.splice(index, 1);
                 this.setState({
-                    loaded: true,
-                    resp: resp.data
+                    sideBarLoaded: true,
+                    SBResp: resp.data
                 })
-                localStorage.setItem("sidebar", JSON.stringify(this.state.resp));
+                localStorage.setItem("sidebar", JSON.stringify(this.state.SBResp));
             });
         }
     }
@@ -74,9 +74,10 @@ class Sidebar extends Component {
         this.fetchPages();
     }
 
+
     render() {
-        if (this.state.loaded) {
-            const links = this.state.resp.data;
+        if (this.state.sideBarLoaded) {
+            const links = this.state.SBResp.data;
             return (
                 <div className="sidebar">
                     <h1>Menu</h1>

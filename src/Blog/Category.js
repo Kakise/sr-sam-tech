@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import {Helmet} from "react-helmet";
-import Header from "./partial/Header";
-import Sidebar from "./partial/Sidebar";
 import LinkWithPreload from "./partial/LinkWithPreload";
 import CommentCount from "./partial/CommentCount";
 import {butter, cacheVersion} from "../App";
@@ -15,9 +13,6 @@ function loadPage(name) {
             <Helmet>
                 <title>{`Sam's TechBlog - ${name}`}</title>
             </Helmet>
-            <Header/>
-            <Sidebar/>
-
         </>
     )
 }
@@ -80,9 +75,8 @@ class Category extends Component {
         if (this.state.loaded) {
             const category = this.state.resp.data;
             return (
-                <div className="grid">
-                    {loadPage(category.name)}
                     <div className="categories">
+                        {loadPage(category.name)}
                         <h1>{category.name}</h1>
                         <div>
                             {category.recent_posts.map((post, key) => {
@@ -114,7 +108,6 @@ class Category extends Component {
                             }
                         </div>
                     </div>
-                </div>
             )
         } else {
             return loadingDiv();

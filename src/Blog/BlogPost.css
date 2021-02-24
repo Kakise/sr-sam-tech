@@ -1,7 +1,7 @@
 .post {
-    width: 80%;
-    margin: auto;
-    padding-bottom: 20px;
+    grid-area: 2 / 2 / 3 / 7;
+    max-height: 70vh;
+    overflow: scroll;
 }
 
 img {
@@ -12,7 +12,7 @@ img {
 
 @media (max-width: 600px) {
     .post {
-        width: 100%;
+        grid-area: 2 / 1 / 3 / 7;
     }
 }
 
@@ -40,26 +40,6 @@ img {
     box-shadow: 4px 4px rgba(0, 0, 150, .1);
 }
 
-.box {
-    border: solid 4px rgba(0, 0, 0, .6);
-    padding: 7px;
-    box-shadow: 3px 3px rgba(0, 0, 150, .1);
-    position: relative;
-    top: 0;
-    left: 0;
-    width: fit-content;
-    transition: box-shadow 1s, left 1s, top 1s;
-    font-family: 'Marmelad', sans-serif;
-}
-
-.box:hover {
-    border: solid 4px rgba(0, 0, 0, .6);
-    padding: 7px;
-    box-shadow: 8px 8px rgba(0, 0, 150, .1);
-    top: -5px;
-    left: -5px;
-    width: fit-content;
-}
 
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
