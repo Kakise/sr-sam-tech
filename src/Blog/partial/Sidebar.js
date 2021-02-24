@@ -1,18 +1,18 @@
 import React, {Component} from "react";
 import {ReactComponent as Github} from "../res/github.svg";
 import {ReactComponent as Twitter} from "../res/twitter.svg";
+import LinkWithPreload from "./LinkWithPreload";
 import {butter, cacheVersion} from "../../App";
 import "./Sidebar.css";
-import {Link} from "react-router-dom";
 
 function box(link, text) {
     return (
         <>
-            <Link to={link}>
+            <LinkWithPreload to={link}>
                 <div className="box">
                     {text}
                 </div>
-            </Link>
+            </LinkWithPreload>
         </>
     );
 }
