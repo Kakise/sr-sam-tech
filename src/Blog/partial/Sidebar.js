@@ -1,18 +1,18 @@
 import React, {Component} from "react";
-import LinkWithPreload from "./LinkWithPreload";
 import {ReactComponent as Github} from "../res/github.svg";
 import {ReactComponent as Twitter} from "../res/twitter.svg";
 import {butter, cacheVersion} from "../../App";
 import "./Sidebar.css";
+import {Link} from "react-router-dom";
 
 function box(link, text) {
     return (
         <>
-            <LinkWithPreload to={link}>
+            <Link to={link}>
                 <div className="box">
                     {text}
                 </div>
-            </LinkWithPreload>
+            </Link>
         </>
     );
 }
@@ -51,9 +51,16 @@ class Sidebar extends Component {
 
     fetchPages() {
         if (!this.state.loaded) {
-            butter.page.list('*').then((resp) => {
+            butter.page.list('default').then((resp) => {
                 resp.data["retrieved"] = Date.now(); // Store cached date
                 resp.data["cacheVersion"] = cacheVersion;
+                let index = 0;
+                let i;
+                for (i = 0; i < resp.data.data.length; i++) {
+                    if (resp.data.data[i].slug === "404")
+                        index = i;
+                }
+                resp.data.data.splice(index, 1);
                 this.setState({
                     loaded: true,
                     resp: resp.data

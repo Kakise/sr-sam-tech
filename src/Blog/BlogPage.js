@@ -32,6 +32,10 @@ class BlogPage extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.unlisten();
+    }
+
     loadPage() {
         const page = this.state.resp.data;
         return (
@@ -46,13 +50,13 @@ class BlogPage extends Component {
         )
     }
 
-    fetchPage(page) {
-        if (!this.state.loaded) {
+    fetchPage(page, chgPage) {
+        if (!this.state.loaded || chgPage) {
             const search = this.props.location.search;
             const params = new URLSearchParams(search);
-            const preview = params.get('preview');
+            const preview = params.get('preview') ? 1 : 0;
 
-            butter.page.retrieve('*', page, {'preview': preview}).then((resp) => {
+            butter.page.retrieve('default', page, {'preview': preview}).then((resp) => {
                 resp.data["retrieved"] = Date.now(); // Store cached date
                 resp.data["cacheVersion"] = cacheVersion;
                 this.setState({
@@ -61,16 +65,24 @@ class BlogPage extends Component {
                 })
                 if (!preview)
                     localStorage.setItem(page, JSON.stringify(this.state.resp));
-            }).catch(function(resp) {
+            }).catch(function (resp) {
                 window.location.href = "/404";
             });
         }
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+        let chgPage = false;
+        this.unlisten = this.props.history.listen((location, action) => {
+            console.log("Page changed")
+            console.log(`The current URL is ${location.pathname}${location.search}${location.hash}`)
+            console.log(`The last navigation action was ${action}`)
+            chgPage = true;
+            this.fetchPage(location.pathname.split("/")[1], chgPage);
+        });
         const page = this.props.match.params.page;
 
-        this.fetchPage(page);
+        this.fetchPage(page, chgPage);
     }
 
     render() {
