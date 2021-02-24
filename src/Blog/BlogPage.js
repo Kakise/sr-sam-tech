@@ -66,7 +66,8 @@ class BlogPage extends Component {
                 if (!preview)
                     localStorage.setItem(page, JSON.stringify(this.state.resp));
             }).catch(function (resp) {
-                window.location.href = "/404";
+                // TODO: Catch 404 ?
+                // window.location.href = "/404";
             });
         }
     }
