@@ -52,6 +52,7 @@ class BlogPage extends Component {
             const search = this.props.location.search;
             const params = new URLSearchParams(search);
             const preview = params.get('preview') ? 1 : 0;
+            let e404 = 0;
 
             butter.page.retrieve('default', page, {'preview': preview}).then((resp) => {
                 resp.data["retrieved"] = Date.now(); // Store cached date
@@ -63,9 +64,20 @@ class BlogPage extends Component {
                 if (!preview)
                     localStorage.setItem(page, JSON.stringify(this.state.resp));
             }).catch(function (resp) {
-                // TODO: Catch 404 ?
-                // window.location.href = "/404";
+                // For some reason, "this" is undefined right here
+                // I don't know why
+                // I don't know how
+                // Please end my pain
+                e404 = 1;
             });
+
+            // Dirty 404
+            if (e404) {
+                this.setState({
+                    loaded: false,
+                    404: true
+                });
+            }
         }
     }
 
@@ -93,6 +105,14 @@ class BlogPage extends Component {
                     </div>
                 </>
             );
+        } else if (404) {
+            return (
+                <div className="blogHome">
+                    <h1>Erreur 404</h1>
+                    <p>La page que vous avez demandé n'a pas été trouvée. Si vous pensez que c'est une erreur, merci de
+                        nous en informer via le formulaire de contact.</p>
+                </div>
+            )
         } else {
             return (
                 <div className="loading">

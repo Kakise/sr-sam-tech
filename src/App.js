@@ -28,6 +28,16 @@ const routes = [
     {path: "/:page", exact: true, component: BlogPage}
 ];
 
+function e404() {
+    return (
+        <div className="blogHome">
+            <h1>Erreur 404</h1>
+            <p>La page que vous avez demandé n'a pas été trouvée. Si vous pensez que c'est une erreur, merci de nous en
+                informer via le formulaire de contact.</p>
+        </div>
+    );
+}
+
 function App() {
     return (
         <main>
@@ -43,6 +53,7 @@ function App() {
                             component={route.component}
                         />
                     ))}
+                    <Route component={e404}/>
                 </Switch>
                 <Footer />
             </Suspense>
