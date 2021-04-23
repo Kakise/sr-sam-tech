@@ -40,24 +40,27 @@ function e404() {
 
 function App() {
     return (
-        <main>
-            <Suspense fallback={<div className="loading">Loading...</div>}>
-                <Header/>
-                <Sidebar/>
-                <Switch>
-                    {routes.map(route => (
-                        <Route
-                            key={route.path}
-                            exact={route.exact}
-                            path={route.path}
-                            component={route.component}
-                        />
-                    ))}
-                    <Route component={e404}/>
-                </Switch>
-                <Footer />
-            </Suspense>
-        </main>
+        <>
+            <main>
+                <Suspense fallback={<div className="loading">Loading...</div>}>
+                    <Header/>
+                    <Sidebar/>
+                    <Switch>
+                        {routes.map(route => (
+                            <Route
+                                key={route.path}
+                                exact={route.exact}
+                                path={route.path}
+                                component={route.component}
+                            />
+                        ))}
+                        <Route component={e404}/>
+                    </Switch>
+
+                </Suspense>
+            </main>
+            <Footer />
+        </>
     )
 }
 
